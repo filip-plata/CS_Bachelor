@@ -1,0 +1,16 @@
+
+@mixin form-margins($margin) {
+  margin-left: $margin;
+  margin-right: $margin;
+  margin-top: 120px;
+
+  width: 100vw - 2 * $margin;
+}
+
+@mixin content-margins($margin) {
+  margin-left: $margin;
+  margin-right: $margin;
+  margin-top: 8ex;
+
+  width: 100vw - 2 * $margin;
+}

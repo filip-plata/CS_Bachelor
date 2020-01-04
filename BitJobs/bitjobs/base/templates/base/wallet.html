@@ -1,0 +1,38 @@
+{% extends 'base/base.html' %}
+
+{% load bootstrap3 %}
+{% load compile_static %}
+{% load static %}
+{% load i18n %}
+
+{% block include_css %}
+    {{ block.super }}
+
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'base/stylesheets/wallet.scss'|compile %}">
+{% endblock %}
+
+{% block include_js %}
+    {{ block.super }}
+{% endblock %}
+
+
+{% block body %}
+    <h2>{% trans 'Your balance: ' %} {{ wallet.balance }} LCT</h2>
+    <h2>{% trans 'Deposit address' %} {{ wallet.get_address }}</h2>
+    <h2><a href="{% url 'check-deposit' %}">{% trans 'Check deposit' %}</a></h2>
+    <h2>{% trans 'Withdraw' %}</h2>
+    <div id="withdraw-form">
+        <form action="{% url 'wallet-details' %}" method="post" class="form">
+            {% csrf_token %}
+            {% bootstrap_form form %}
+            {% buttons %}
+                <button type="submit" class="btn btn-primary">
+                    {% bootstrap_icon "star" %} {% trans 'Withdraw' %}
+                </button>
+            {% endbuttons %}
+        </form>
+    </div>
+
+
+{% endblock %}

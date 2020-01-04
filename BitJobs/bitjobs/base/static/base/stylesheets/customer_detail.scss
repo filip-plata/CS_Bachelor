@@ -1,0 +1,24 @@
+@import 'margins.scss';
+
+#content {
+    @include content-margins(6vw);
+
+    #customer-name {
+        text-align: center;
+        text-decoration: solid;
+        font-size: 350%;
+    }
+
+    #customer-offers, #customer-opinions {
+        margin-right: 5em;
+        text-align: right;
+        text-decoration: solid;
+        font-size: 150%;
+
+
+        a:hover {
+            color: #0f0f0f;
+        }
+    }
+
+}

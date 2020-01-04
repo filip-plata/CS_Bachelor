@@ -1,0 +1,33 @@
+{% extends 'base/base.html' %}
+
+{% load compile_static %}
+{% load static %}
+{% load bootstrap3 %}
+{% load i18n %}
+
+{% block include_css %}
+    {{ block.super }}
+
+    <link rel="stylesheet" type="text/css"
+            href="{% static 'base/stylesheets/customer_detail.scss'|compile %}">
+{% endblock %}
+
+{% block include_js %}
+    {{ block.super }}
+{% endblock %}
+
+{% block body %}
+    <div id="content">
+        <div id="customer-name">{{ customer.user }}</div>
+        <div id="customer-offers">
+            <a href="{% url 'commission-user-dashboard' %}?pk={{ customer.user.pk }}">
+                {% trans 'Current offers' %}
+            </a>
+        </div>
+        <div id="customer-opinions">
+            <a href="{% url 'customer-opinions' %}?pk={{ customer.user.pk }}">
+                {% trans 'Opinions about' %}
+            </a>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,78 @@
+Funkcjonalności 1 wersji:
+- Rejetracja
+- Dodawanie i obsługa zleceń
+- Przepływ pieniędzy przez stronę
+- Tagi i wyszukiwarka zleceń
+- Część z oferowanych BTC jest pobieranych jako opłata
+
+Potencjane funkcjonalności ver.2:
+- Panel admina(ilość BTC, otwartych zleceń)
+- Wpłata i wypłata BTC
+- System plusów i mimusów z wykonanych i zgłoszonych ofert
+
+Usecase:
+1. Wpłacam bitcoiny(ver.2)
+2. Tworzę zgłoszenie i oferuję za nie 0.01BTC, które są pobierane z mojego konta
+3. Ktoś zgłasza chęć do wykonania zlecenia
+4. Przyjmuję któregoś kandydata
+5. Zamyka się możliwość zgłaszania chęci wykonania zlecenia
+6. Ktoś dotarcza mi to czego oczekiwałem
+7. Ten ktoś dostaje pieniądze
+
+Otwarte problemy:
+- jak rozwiązujemy sytuację gdy sprzedawca i kupiec się nie dogadują
+- jak ułatwić dodawanie nowej waluty (docelowo zmiana powinna dotyczyć tylko frontendu i modułu money)
+
+Przepływ informacji, odpowiedzialności modułów:
+* Portfel
++ opis:
+-   Dla każdej z supportowanych walut trzyma jej ilość
+-   1-1 z User oraz 1-1 z zleceniem, motywacja:
+-   użytkownik tworząc zlecenie powinien mieć odpowiednią ilość pieniędzy,
+-   powinny zostać przypisane do zlecenia, z możliwością zwrotu po usunięciu zlecenia
++ interfejs:
+-   founds(name):   ilość waluty o nazwie name
+-   transfer(target, name, quantity):   przelewa pieniądze z siebie do target
+-   CannotTransfer: error rzucany przez transfer
+
+* User
++ opis:
+-   Reprezentuje użytkownika, ma przypisany portfel
+* interfejs:
+-   portfel(): zwraca portfel
+-   Co jeszcze????
+
+* Zlecenia:
++ opis:
+-   Zlecenie może być w 4 stanach: otwarte, czekające na rozwiązanie, czeka na zakceptowanie, zakończone
+-   Pomiędzy stanami 2-3 można przechodzić kilka razy
+-   Gdy ludzie sie dogadują to wykonawca otrzymuje pieniądze
+-   Gdy się nie zgadzają to pieniądze są dzielone po połowie między nich
+-   zgadznie/dogadywanie moża zrealizować jako opinie
+* interfejs:
+-   create(user, desc, coinName, founds):   tworzy nowe zlecenie
+-   jakieś funkcje do modyfikacji ???
+-   Odpowiednie Errory
+
+* Opinia:
++ opis:
+-   Dotyczy zakończonego zlecenia, obie strony mogą wystawić drugiej po jednej ocenie, razem z opisem
++ interfejs:
+-   listPosible(user):  zwraca możliwe do dodania kometarze
+-   addOpinion(user, transaction, desc, positive):  dodaje opinie
+-   CannotCreateOpinion:    error rzucany przez addOpinion
+
+Potencjalne wydzielone części:
+- Zlecenia:     Filip
+- Portfel:      Jarek
+- Opinie:       Kuba
+- Frontend:     Daniel
+
+Dodatkowe dokumenty:
+- Plakat (1 strona w pdf).
+- Dokumentacja (co najmniej: opis problemu, opis rozwiązania od strony
+  funkcjonalnej, opis rozwiązania od strony technicznej, przykładowy
+  scenariusz użycia ilustrowany screenshotami).
+- Prezentacja (slajdy w pdf na 15 minut)
+  - ≤5 minut wprowadzenia do problemu.
+  - ≥10 minut prezentacji architektury, podziału na moduły, podmoduły(ew. klasy).

@@ -1,0 +1,7 @@
+{% load i18n %}{% blocktrans %}Welcome to Bitjobs,
+
+to finish the registration, please click on the link below:{% endblocktrans %}
+https://{{site}}{% url 'registration_activate' activation_key %}
+
+{% blocktrans %}Best wishes,
+The Bitjobs Team{% endblocktrans %}

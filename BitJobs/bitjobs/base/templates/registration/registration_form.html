@@ -1,0 +1,36 @@
+{% extends 'base/base.html' %}
+
+{% load bootstrap3 %}
+{% load compile_static %}
+{% load static %}
+{% load i18n %}
+
+
+{% block include_css %}
+    {{ block.super }}
+
+    <link rel="stylesheet" type="text/css"
+        href="{% static 'registration/stylesheets/registration_form.scss'|compile %}">
+{% endblock %}
+
+{% block include_js %}
+    {{ block.super }}
+{% endblock %}
+
+
+{% block body %}
+    {{ body.super }}
+
+    <div id="register-form">
+      <form action="{% url 'registration' %}" method="post" class="form">
+          {% csrf_token %}
+          {% bootstrap_form form %}
+          {% buttons %}
+              <button type="submit" class="btn btn-primary">
+                  {% bootstrap_icon "star" %} {% trans 'Submit' %}
+              </button>
+          {% endbuttons %}
+      </form>
+    </div>
+
+{% endblock %}

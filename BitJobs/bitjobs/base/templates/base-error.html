@@ -1,0 +1,22 @@
+{% extends 'base/base.html' %}
+
+{% load compile_static %}
+{% load static %}
+
+{% block include_css %}
+    {{ block.super }}
+
+    <link rel="stylesheet" type="text/css"
+            href="{% static 'base/stylesheets/error-msg.scss'|compile %}">
+{% endblock %}
+
+{% block include_js %}
+    {{ block.super }}
+{% endblock %}
+
+{% block body %}
+    <div id="error-msg">
+        {% block error-msg %}
+        {% endblock %}
+    </div>
+{% endblock %}

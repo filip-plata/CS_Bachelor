@@ -1,0 +1,111 @@
+{% extends 'base/base.html' %}
+
+{% load compile_static %}
+{% load static %}
+{% load bootstrap3 %}
+{% load i18n %}
+
+
+{% block include_css %}
+    {{ block.super }}
+
+    <link rel="stylesheet" type="text/css"
+          href="{% static 'base/stylesheets/commission_detail.scss'|compile %}">
+{% endblock %}
+
+{% block include_js %}
+    {{ block.super }}
+{% endblock %}
+
+{% block body %}
+    <div id="content">
+        <div id="title">{{ commission.title }}</div>
+        <div id="desc">{% trans 'Description' %}: {{ commission.description }}</div>
+        <div id="price">{% trans "Price" %}: {{ commission.price }}</div>
+        <div id="orderer">
+            {% trans "Orderer" %}:
+            <a href="{% url 'user-detail' commission.orderer.pk %}">
+                {{ commission.orderer }}
+            </a>
+        </div>
+        <ul id="tags">
+            {% for tag in commission.tags.names %}
+                <li>
+                    <a href="{% url 'commission-dashboard' %}?desc={{ tag }}">#{{ tag }} </a>
+                </li>
+            {% endfor %}
+        </ul>
+
+        {% if commission.contractor == None %}
+            <ul id="bids">
+                {% for bid in commission_bids %}
+                    <li>
+                        <div id="bidder">
+                            {% trans 'Bidder' %}:
+                            <a href="{% url 'user-detail' bid.bidder.pk %}">
+                                {{ bid.bidder }}
+                            </a>
+                        </div>
+                        <div id="date">{% trans 'Date' %}: {{ bid.date_added }}</div>
+                        <div id="comment">{% trans 'Comment' %}: {{ bid.bidder_comment }}</div>
+                        {% if user == commission.orderer %}
+                            <a href={% url 'commission-choose' pk=commission.id bid_id=bid.id %}>
+                                {% trans 'Choose' %}</a>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <h3>{% trans 'Chosen bid:' %}</h3>
+            <div id="chosen">
+                <div id="bidder">
+                    {% trans 'Contractor' %}:
+                    <a href="{% url 'user-detail' chosen_bid.bidder.pk %}">
+                        {{ chosen_bid.bidder }}
+                    </a>
+                </div>
+                <div id="date">{% trans 'Date' %}: {{ chosen_bid.date_added }}</div>
+                <div id="comment">{% trans 'Comment' %}: {{ chosen_bid.bidder_comment }}</div>
+            </div>
+            {% if commission.status == 'F' %}
+                <h4>{% trans 'Done' %}</h4>
+                {% if user == commission.orderer and opinion_give %}
+                    <h4>
+                        <a href="{% url 'opinion-add' %}?pk={{ commission.pk }}">
+                            {% trans 'Add opinion' %} {% trans 'about contractor' %}
+                        </a>
+                    </h4>
+                {% elif user == commission.contractor and opinion_give %}
+                    <h4>
+                        <a href="{% url 'opinion-add' %}?pk={{ commission.pk }}">
+                            {% trans 'Add opinion' %} {% trans 'about orderer' %}
+                        </a>
+                    </h4>
+                {% elif involved %}
+                    <h4>
+                        {% trans 'Opinion already given' %}
+                    </h4>
+                {% endif %}
+
+            {% elif user == commission.orderer %}
+                <div id="choice">
+                    <div><a href="{% url 'commission-accept' commission.pk %}">{% trans 'Accept' %}</a></div>
+                </div>
+            {% endif %}
+        {% endif %}
+
+        {% if user.is_authenticated and user != commission.orderer and commission.contractor == None %}
+            <div id="commission-bid-form">
+                <form action="{% url 'commission-bid' %}" method="post" class="form">
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
+                    {% buttons %}
+                        <button type="submit" class="btn btn-primary">
+                            {% bootstrap_icon "star" %} {% trans 'Submit' %}
+                        </button>
+                    {% endbuttons %}
+                </form>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

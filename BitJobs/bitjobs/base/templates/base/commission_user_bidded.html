@@ -1,0 +1,64 @@
+{% extends 'base/base.html' %}
+
+{% load compile_static %}
+{% load static %}
+{% load bootstrap3 %}
+{% load i18n %}
+
+{% block include_css %}
+    {{ block.super }}
+
+    <link rel="stylesheet" type="text/css"
+            href="{% static 'base/stylesheets/commission_user.scss'|compile %}">
+{% endblock %}
+
+{% block include_js %}
+    {{ block.super }}
+{% endblock %}
+
+{% block body %}
+    <div id="content">
+        {% if comm_user %}
+            <h1>{% trans 'Offers bidded by user' %} {{ user_name }}</h1>
+            <table id="commissions">
+                    <tr id="title">
+                        <th>{% trans 'Name' %}</th>
+                        <th>{% trans 'Description' %}</th>
+                        <th>{% trans 'Tags' %}</th>
+                    </tr>
+                {% for comm in comm_user %}
+                    <tr class='clickable-row' data-url="{% url 'commission-detail' comm.id %}">
+                        <td>
+                            {{ comm.title }}
+                        </td>
+                        <td>{{ comm.description }}</td>
+                        <td>
+                            {% for tag in comm.tags.names %}
+                            <a href="{% url 'commission-dashboard' %}?desc={{ tag }}">#{{ tag }} </a>
+                            {% endfor %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+
+            {% if is_paginated %}
+                <div class="pagination">
+                  <span class="page-links">
+                    {% if page_obj.has_previous %}
+                      <a href="?pk={{ request.GET.pk }}&page={{ page_obj.previous_page_number }}">previous</a>
+                    {% endif %}
+                      <span class="page-current">
+                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                      </span>
+                      {% if page_obj.has_next %}
+                        <a href="?pk={{ request.GET.pk }}&page={{ page_obj.next_page_number }}">next</a>
+                      {% endif %}
+                  </span>
+                </div>
+            {% endif %}
+
+        {% else %}
+            <h3>{% trans 'No offers bidded.' %}</h3>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,45 @@
+@import 'top-bar.scss';
+
+$footer-margin: 40px;z
+
+body{
+  overflow-y:scroll;
+}
+
+footer {
+  display: flex;
+  flex-direction: row;
+
+  margin-top: $footer-margin;
+  margin-bottom: $footer-margin;
+  padding: 1em;
+
+  .flex-item {
+    flex: 1;
+    text-align: center;
+    vertical-align: middle;
+    align-items: stretch;
+    margin: auto;
+
+    &:nth-child(1) {
+      text-align: right;
+    }
+
+    &:last-child {
+      text-align: left;
+
+    }
+
+  }
+}
+
+.mail {
+  color: steelblue;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  a:hover {
+    text-decoration: none;
+  }
+  text-align: center;
+}

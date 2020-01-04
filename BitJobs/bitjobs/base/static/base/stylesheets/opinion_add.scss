@@ -1,0 +1,7 @@
+@import 'margins';
+
+#opinion-add-form {
+  @include form-margins(25vw);
+
+  text-align: center;
+}

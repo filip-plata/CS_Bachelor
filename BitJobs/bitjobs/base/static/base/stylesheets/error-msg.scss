@@ -1,0 +1,14 @@
+@import 'top-bar.scss';
+
+$error-msg-color: #ff1300;
+
+
+#error-msg {
+  text-align: center;
+  margin: auto;
+  color: $error-msg-color;
+
+  h1 {
+    font-size: 700%;
+  }
+}

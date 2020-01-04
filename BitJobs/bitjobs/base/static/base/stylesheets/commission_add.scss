@@ -1,0 +1,7 @@
+@import 'margins';
+
+#commission-form {
+  @include form-margins(25vw);
+
+  text-align: center;
+}

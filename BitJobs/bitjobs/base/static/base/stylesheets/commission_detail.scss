@@ -1,0 +1,39 @@
+@import 'margins.scss';
+
+div#content {
+    @include content-margins(10vw);
+}
+
+div#title {
+    font-size: 300%;
+    text-decoration: solid;
+    text-align: center;
+    margin: 1ex;
+}
+
+div#desc {
+    border-radius: 10px;
+    border: 1px solid #1d3fda;
+    padding: 1ex;
+    font-size: 150%;
+    text-align: left;
+    margin-bottom: 1ex;
+}
+
+ul#tags {
+    list-style: none;
+    padding: 1ex;
+    font-size: 150%;
+    text-align: right;
+    margin-bottom: 1ex;
+
+    li {
+        float: right;
+        padding-left: 1.5ex;
+    }
+}
+
+div#chosen, div#choice {
+    padding: 1em;
+    margin: auto;
+}

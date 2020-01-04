@@ -1,0 +1,7 @@
+@import '../../base/stylesheets/margins';
+
+#login-form {
+  @include form-margins(40vw);
+
+  text-align: center;
+}

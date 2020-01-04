@@ -1,0 +1,16 @@
+{% extends 'base-error.html' %}
+
+{% load static %}
+{% load i18n %}
+
+{% block include_css %}
+    {{ block.super }}
+{% endblock %}
+
+{% block include_js %}
+    {{ block.super }}
+{% endblock %}
+
+{% block error-msg %}
+    <h1>500 {% trans "Internal Server Error" %}</h1>
+{% endblock %}
