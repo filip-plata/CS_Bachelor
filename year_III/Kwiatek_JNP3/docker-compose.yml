@@ -1,0 +1,28 @@
+version: '2'
+
+services:
+  coap-proxy:
+    build: coap-proxy
+    restart: always
+    depends_on:
+      - backend
+    network_mode: "host"
+  backend:
+    build: server
+    volumes:
+      - .:/iot-server
+    ports:
+      - "48088:8088"
+  frontend:
+    build: frontend
+    depends_on:
+      - backend
+    ports:
+     - "40080:5000"
+  #web:
+  #  build: web
+  #  depends_on:
+  #    - backend
+  #    - frontend
+  #  ports:
+  #  -  "80:80"
