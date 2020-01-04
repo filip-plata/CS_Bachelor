@@ -1,0 +1,3 @@
+PATH=/usr/local/bin:/usr/local/sbin:/usr/sbin:/usr/bin:/sbin:/bin
+
+*/15 * * * * root /stockAPI/manage.py stocktick >> /var/log/cron.log 2>&1

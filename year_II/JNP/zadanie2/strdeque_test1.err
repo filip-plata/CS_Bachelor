@@ -1,0 +1,221 @@
+strdeque_new()
+strdeque_new: deque 0 created
+emptystrdeque()
+strdequeconst init invoked
+strdeque_new()
+strdeque_new: deque 1 created
+strdequeconst init finished
+strdeque_insert_at(0, 0, "a")
+emptystrdeque()
+emptystrdeque()
+strdeque_insert_at: deque 0, element "a" inserted at 0
+emptystrdeque()
+strdeque_get_at(0, 0)
+emptystrdeque()
+strdeque_get_at: deque 0, element at 0 is "a"
+emptystrdeque()
+strdeque_insert_at(0, 8, "aa")
+emptystrdeque()
+emptystrdeque()
+strdeque_insert_at: deque 0, element "aa" inserted at 1
+emptystrdeque()
+strdeque_get_at(0, 1)
+emptystrdeque()
+strdeque_get_at: deque 0, element at 1 is "aa"
+emptystrdeque()
+strdeque_remove_at(0, 1)
+emptystrdeque()
+emptystrdeque()
+strdeque_remove_at: deque 0, element at 1 removed
+emptystrdeque()
+strdeque_get_at(0, 1)
+emptystrdeque()
+strdeque_get_at: deque 0 does not contain an element at 1
+emptystrdeque()
+strdeque_get_at(0, 0)
+emptystrdeque()
+strdeque_get_at: deque 0, element at 0 is "a"
+emptystrdeque()
+strdeque_insert_at(0, 0, NULL)
+emptystrdeque()
+strdeque_insert_at: attempt to insert NULL into a deque
+emptystrdeque()
+strdeque_get_at(0, 0)
+emptystrdeque()
+strdeque_get_at: deque 0, element at 0 is "a"
+emptystrdeque()
+strdeque_size(0)
+emptystrdeque()
+strdeque_size: deque 0 contains 1 elements
+emptystrdeque()
+strdeque_remove_at(0, 1)
+emptystrdeque()
+emptystrdeque()
+strdeque_remove_at: deque 0 does not contain an element at 1
+emptystrdeque()
+strdeque_size(0)
+emptystrdeque()
+strdeque_size: deque 0 contains 1 elements
+emptystrdeque()
+strdeque_delete(0)
+emptystrdeque()
+emptystrdeque()
+strdeque_delete: deque 0 deleted
+emptystrdeque()
+strdeque_insert_at(0, 0, "b")
+emptystrdeque()
+strdeque_insert_at: deque 0 does not exist
+emptystrdeque()
+strdeque_size(0)
+emptystrdeque()
+strdeque_size: deque 0 does not exist
+emptystrdeque()
+strdeque_get_at(0, 0)
+emptystrdeque()
+strdeque_get_at: deque 0 does not exist
+strdeque_new()
+strdeque_new: deque 2 created
+strdeque_new()
+strdeque_new: deque 3 created
+emptystrdeque()
+strdeque_insert_at(2, 0, "c")
+emptystrdeque()
+emptystrdeque()
+strdeque_insert_at: deque 2, element "c" inserted at 0
+emptystrdeque()
+strdeque_insert_at(2, 0, "cc")
+emptystrdeque()
+emptystrdeque()
+strdeque_insert_at: deque 2, element "cc" inserted at 0
+emptystrdeque()
+strdeque_insert_at(2, 0, "ccc")
+emptystrdeque()
+emptystrdeque()
+strdeque_insert_at: deque 2, element "ccc" inserted at 0
+emptystrdeque()
+strdeque_insert_at(3, 100, "ccc")
+emptystrdeque()
+emptystrdeque()
+strdeque_insert_at: deque 3, element "ccc" inserted at 0
+emptystrdeque()
+strdeque_insert_at(3, 1000, "cc")
+emptystrdeque()
+emptystrdeque()
+strdeque_insert_at: deque 3, element "cc" inserted at 1
+emptystrdeque()
+strdeque_insert_at(3, 10000, "c")
+emptystrdeque()
+emptystrdeque()
+strdeque_insert_at: deque 3, element "c" inserted at 2
+emptystrdeque()
+emptystrdeque()
+strdeque_comp(2, 3)
+emptystrdeque()
+emptystrdeque()
+strdeque_comp: result of comparing deque 2 to deque 3 is 0
+emptystrdeque()
+strdeque_remove_at(2, 0)
+emptystrdeque()
+emptystrdeque()
+strdeque_remove_at: deque 2, element at 0 removed
+emptystrdeque()
+emptystrdeque()
+strdeque_comp(2, 3)
+emptystrdeque()
+emptystrdeque()
+strdeque_comp: result of comparing deque 2 to deque 3 is -1
+emptystrdeque()
+strdeque_delete(3)
+emptystrdeque()
+emptystrdeque()
+strdeque_delete: deque 3 deleted
+emptystrdeque()
+emptystrdeque()
+strdeque_comp(2, 3)
+emptystrdeque()
+strdeque_comp: deque 3 does not exist
+emptystrdeque()
+strdeque_delete(2)
+emptystrdeque()
+emptystrdeque()
+strdeque_delete: deque 2 deleted
+emptystrdeque()
+emptystrdeque()
+strdeque_comp(2, 3)
+emptystrdeque()
+strdeque_comp: deque 2 does not exist
+emptystrdeque()
+strdeque_comp: deque 3 does not exist
+emptystrdeque()
+emptystrdeque()
+emptystrdeque()
+strdeque_comp(2, the Empty Deque)
+emptystrdeque()
+strdeque_comp: deque 2 does not exist
+emptystrdeque()
+emptystrdeque()
+emptystrdeque()
+strdeque_comp(the Empty Deque, 3)
+emptystrdeque()
+strdeque_comp: deque 3 does not exist
+emptystrdeque()
+emptystrdeque()
+emptystrdeque()
+emptystrdeque()
+strdeque_comp(the Empty Deque, the Empty Deque)
+emptystrdeque()
+emptystrdeque()
+strdeque_comp: result of comparing the Empty Deque to the Empty Deque is 0
+emptystrdeque()
+emptystrdeque()
+strdeque_size(the Empty Deque)
+emptystrdeque()
+strdeque_size: the Empty Deque contains 0 elements
+emptystrdeque()
+emptystrdeque()
+strdeque_delete(the Empty Deque)
+emptystrdeque()
+strdeque_delete: attempt to remove the Empty Deque
+emptystrdeque()
+emptystrdeque()
+strdeque_insert_at(the Empty Deque, 0, "d")
+emptystrdeque()
+emptystrdeque()
+strdeque_insert_at: attempt to insert into the Empty Deque
+emptystrdeque()
+emptystrdeque()
+strdeque_size(the Empty Deque)
+emptystrdeque()
+strdeque_size: the Empty Deque contains 0 elements
+emptystrdeque()
+emptystrdeque()
+strdeque_insert_at(the Empty Deque, 0, "d")
+emptystrdeque()
+emptystrdeque()
+strdeque_insert_at: attempt to insert into the Empty Deque
+emptystrdeque()
+emptystrdeque()
+strdeque_insert_at(the Empty Deque, 0, "dd")
+emptystrdeque()
+emptystrdeque()
+strdeque_insert_at: attempt to insert into the Empty Deque
+emptystrdeque()
+emptystrdeque()
+strdeque_get_at(the Empty Deque, 0)
+emptystrdeque()
+strdeque_get_at: the Empty Deque does not contain an element at 0
+emptystrdeque()
+emptystrdeque()
+strdeque_remove_at(the Empty Deque, 0)
+emptystrdeque()
+strdeque_remove_at: attempt to remove from the Empty Deque
+emptystrdeque()
+emptystrdeque()
+strdeque_size(the Empty Deque)
+emptystrdeque()
+strdeque_size: the Empty Deque contains 0 elements
+emptystrdeque()
+emptystrdeque()
+strdeque_clear(the Empty Deque)
+emptystrdeque()
+strdeque_clear: attempt to clear the Empty Deque

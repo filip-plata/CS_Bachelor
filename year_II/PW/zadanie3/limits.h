@@ -1,0 +1,7 @@
+#ifndef ZADANIE3_LIMITS_H
+#define ZADANIE3_LIMITS_H
+
+#define MAX_VARIABLES 1024
+#define BUF_SIZE 10000
+
+#endif //ZADANIE3_LIMITS_H

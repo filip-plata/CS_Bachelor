@@ -1,0 +1,30 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+"beautifulsoup4" = "==4.6.0"
+certifi = "==2018.1.18"
+chardet = "==3.0.4"
+gunicorn = "==19.6.0"
+idna = "==2.6"
+pytz = "==2018.3"
+requests = "==2.18.4"
+selenium = "==3.10.0"
+"urllib3" = "==1.22"
+Django = "==2.0.3"
+"bs4" = "*"
+schema = "*"
+celery = "*"
+"psycopg2" = "*"
+pika = "*"
+djangorestframework = "*"
+"psycopg2-binary" = "*"
+
+[dev-packages]
+pylint = "*"
+pylint-django = "*"
+
+[requires]
+python_version = "3.6"

@@ -1,0 +1,38 @@
+#index-content {
+    display: flex;
+    margin: auto;
+    flex: 0 0 100%;
+    flex-direction: row;
+
+    padding-left: 2vw;
+    padding-right: 2vw;
+    padding-bottom: 3vh;
+    padding-top: 3vh;
+
+    width: 85vw;
+    height: 550px;
+}
+
+#poland-map {
+    margin: auto;
+    flex: 1;
+}
+
+#votes-summary {
+    margin: inherit;
+}
+
+#votes-summary li > span {
+    float:right;
+}
+
+@media screen and (max-width: 995px) , screen and (max-height: 700px) {
+
+    #index-content {
+        flex-direction: column;
+    }
+
+    #poland-map {
+        display: none;
+    }
+}

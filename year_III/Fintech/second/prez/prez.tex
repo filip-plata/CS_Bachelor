@@ -1,0 +1,297 @@
+\documentclass{beamer}
+
+\usepackage{default}
+\usepackage[MeX]{polski}
+\usepackage[utf8]{inputenc}
+
+\usetheme{Boadilla}
+\usecolortheme{seahorse}
+
+\usepackage{pgfpages}
+%\setbeamertemplate{note page}[plain]
+%\setbeameroption{show notes on second screen=right}
+\setbeameroption{hide notes}
+%\setbeameroption{show only notes}
+
+
+
+\graphicspath{{../img/}}
+
+% \ImgH{ile wysokości slajdu ma zajmować}{zdjęcie}
+\newcommand{\ImgH}[2]{
+	\begin{center}
+		\includegraphics[height=#1\paperheight,keepaspectratio]{#2}
+	\end{center}
+}
+
+% \ImgW{ile szerokości slajdu ma zajmować}{zdjęcie}
+\newcommand{\ImgW}[2]{
+	\begin{center}
+		\includegraphics[width=#1\linewidth,keepaspectratio]{#2}
+	\end{center}
+}
+
+\newcommand{\Title}[1]{\begin{center}{\LARGE \textbf{#1}}\end{center}}
+
+
+
+\title{Kazaa, Skype i Torrent}
+%\subtitle{}
+\author{Mateusz Banaszek, Filip Plata}
+\date{18 grudnia 2017}
+
+
+\begin{document}
+
+	\frame{ \titlepage
+	}
+
+%====================================================================
+\section{Torrent i Skype}
+	\frame{
+		\Title{Torrent}
+	}
+
+	\frame{	\frametitle{Co to jest Torrent}
+		Co to jest Torrent, wie chyba każdy -- plik z metadanymi
+		dla protokołu BitTorrent.
+
+		Należy odróżnić sam protokół od jego najczęstszych
+		zastosowań.
+	}
+
+	\frame{ \frametitle{Protokół BitTorrent}
+		\begin{itemize}
+			\item P2P file sharing
+			\item Jedno z głównych źródeł ruchu w internecie
+			\item Wiele implementacji
+			\item Miesięczna liczba użytkowników -- 1 miliard (2013)
+			\item Specyfikacja - http://jonas.nitro.dk/bittorrent/bittorrent-rfc.html
+		\end{itemize}
+	}
+
+	\frame{ \frametitle{Jak działa BitTorrent?}
+		Torrent zawiera opis pliku, w szczególności podział na
+		segmenty.
+
+		Klient po pobraniu jakiegoś segmentu (1MB najczęściej) może potem sam go udostępniać innym. Duże pliki mogą być pobierane równolegle od różnych węzłów w sieci go udostępniających, co pozwala na znacznie szybsze pobieranie.
+
+		Kolejność pobierania segmentów nie ma znaczenia.
+
+		Informacje o seederach pobiera się z trackera wyspecyfikowanego w pliku .torrent
+	}
+
+	\frame{ \frametitle{Zalety}
+		\begin{itemize}
+			\item Znaczne zmniejszenie zapotrzebowania na zasoby
+			podmiotu udostępniającego plik jako Torrent
+			\item Szybsze, bo równoległe pobieranie segmentów
+			\item Seederzy mogą być dużo bliżej niż oryginalny serwer
+		\end{itemize}
+		Blizzard rozprowadza w ten sposób np. patche
+	}
+
+	\frame{ \frametitle{Wady?}
+		Brak mechanizmu do indeksowania torrentów
+	}
+
+	\frame{ \frametitle{Problemy prawne}
+		Wiele Torrentów zawiera pliki znajdujące się tam bez
+		zgody ich twórców.
+
+		Można odtworzyć, kto pobierał lub udostępniał pliki.
+
+		The Pirate Bay...
+	}
+
+
+	\frame{
+		\Title{Skype}
+	}
+
+	\frame{ \frametitle{Trivia}
+		Co to jest Skype również wszyscy raczej wiedzą.
+
+		Rozmowy z jednego urządzenia na dowolne inne.
+
+		Ponad 40\% rozmów międzynarodowych.
+
+		Zamknięty protokół Microsoftu.
+
+		Zamknięte oprogramowanie.
+
+		Wspiera tylko IPv4.
+
+		Można dzwonić w niektórych krajach na zwykłe telefony.
+	}
+
+	\frame{ \frametitle{Jak działa?}
+		\begin{itemize}
+
+
+		\item Dokładnie nie wiadomo. Zachowuje się podobnie do Kazzy, co nie dziwi, gdyż zostały stworzone przez tych samych ludzi.
+		\item VOIP
+		\item Sieć składa się z supernodów i zwykłych
+		\item Automatyczna elekcja na supernode, najprawdopodobniej trzeba mieć publiczne IP
+		\item Zwykłe nody rozpoczynają komunikację poprzez supernody (problem NATu)
+		\end{itemize}
+	}
+
+	\frame{ \frametitle{Prywatność?}
+		Microsoft udostępnia wszystkie dane rozmów (ich zawartość również) dla NSA i FBI.
+	}
+
+	\frame{ \frametitle{Skype w Chinach}
+		Nie występuje.
+
+		Chińczycy posiadają własny odpowiednik, stworzony przez TOM. Umożliwia to cenzorowanie treści, oraz ich analizowanie -- głównie pod kątem rozmów o Tajwanie, Tybecie, czy KPCh.
+	}
+%====================================================================
+\section{Kazza}
+	\frame{
+		\Title{Kazaa}
+
+		\begin{center}
+			\ImgH{0.20}{Kazaa}
+			{\Tiny en.wikipedia.org/w/index.php?curid=20669083}
+		\end{center}
+	}
+
+	\frame{ \frametitle{Kazaa}
+		\begin{itemize}
+			\item P2P, protokół FastTrack
+			\item Sharman Networks
+			\item zamknięte oprogramowanie i protokół
+			\item pobieranie klientów: 3.2M/tydzień (luty 2003)
+			\item www.kazaa.com nie działa od sierpnia 2012
+			\item zdjęcia, \underline{muzyka}, filmy, dokumenty
+			\item adware/spyware
+		\end{itemize}
+	}
+
+	\frame{ \frametitle{FastTrack}
+		\begin{itemize}
+			\item Kazaa, Grokster, iMesh, Morpheus
+			\item 2.4M użytkowników na raz (2003)
+			\item pobieranie kawałków pliku z różnych miejsc jednocześnie
+			\item UUHash
+			\item superwęzeł -- moc CPU, przepustowość łącza (dynamicznie)
+			\item zamknięto-źródłowe szyfrowanie
+			\item pobieranie danych po HTTP
+			\item query flooding
+			\item reverse-engineering protokołu klient---superwęzeł
+		\end{itemize}
+	}
+
+	\frame{ \frametitle{Analiza ruchu}
+		\textit{Deconstructing the Kazaa Network}\\
+		Nathaniel Leibowitz, Matei Ripeanu, Adam Wierzbicki
+
+		2003
+
+		\vspace{2em}
+
+		Analiza ruchu Kazaa (pobieranie po HTTP) u izraelskiego ISP.
+	}
+
+	\frame{ \frametitle{Zebrane statystyki}
+		\ImgW{1}{table1}
+	}
+
+	\frame{ \frametitle{Popularne pliki -- pobrania}
+		\ImgH{0.8}{fig1}
+	}
+
+	\frame{ \frametitle{Popularne pliki -- pobrania}
+		\ImgH{0.8}{fig2}
+	}
+
+	\frame{ \frametitle{Popularne pliki -- ruch}
+		\ImgH{0.8}{fig3}
+	}
+
+	\frame{ \frametitle{Popularne pliki -- ruch}
+		\ImgH{0.8}{fig4}
+	}
+
+	\frame{ \frametitle{Wielkość plików}
+		\ImgH{0.7}{fig5}
+
+		\begin{itemize}
+			\item $>=$ 700MB --- 60\% ruchu
+		\end{itemize}
+	}
+
+	\frame{ \frametitle{Nowe pliki}
+		\ImgH{0.8}{fig8}
+		% Once a file is requested it will be requested again soon
+	}
+
+	\frame{ \frametitle{Nowe pliki}
+		\ImgH{0.8}{fig10}
+	}
+
+	\frame{ \frametitle{Popularność plików -- stałość}
+		\ImgH{0.8}{fig11}
+		% 2: most likely the Kazaa software installation packages
+	}
+
+	\frame{ \frametitle{Popularność plików -- stałość}
+		\ImgH{0.65}{fig12}
+
+		\begin{itemize}
+			\item zawsze popularne
+			\item krótko popularne
+		\end{itemize}
+	}
+
+	\frame{ \frametitle{data-sharing graph}
+		\begin{itemize}
+			\item węzeł: użytkownik
+			\item krawędź: podobieństwo pobrań\\
+				$>= m$ wspólnych plików w okresie $T$
+			\item $m = $ 1..5
+			\item $T = $ 4..48 godzin
+		\end{itemize}
+
+		\vspace{2em}
+
+		small-world network
+		\begin{itemize}
+			\item mała średnia długość ścieżki (jak w losowym grafie)
+			\item znacznie większy clustering coefficient niż w losowym grafie
+		\end{itemize}
+	}
+
+	\frame{ \frametitle{data-sharing graph}
+		\ImgH{0.8}{table2}
+	}
+
+	\frame{ \frametitle{data-sharing graph}
+		\ImgH{0.8}{fig14}
+	}
+
+
+%====================================================================
+\section{Koniec}
+	\frame{	\frametitle{}
+		\begin{center}
+			\Huge{Pytania?}
+		\end{center}
+	}
+
+	\frame{	\frametitle{Polecamy}
+		Grafiki i informacje:
+		\begin{itemize}
+		\item \url{https://en.wikipedia.org/wiki/BitTorrent}
+		\item \url{http://www.bittorrent.com/lang/pl/}
+		\item \url{https://en.wikipedia.org/wiki/Skype}
+		\item \url{http://www.divms.uiowa.edu/~ghosh/skype.pdf}
+		\item \url{https://en.wikipedia.org/wiki/Kazaa}
+		\item \url{https://en.wikipedia.org/wiki/FastTrack}
+		\item \url{https://pl.wikipedia.org/wiki/FastTrack}
+		\item \url{https://www.globus.org/sites/default/files/kazaa.pdf}
+		\end{itemize}
+	}
+
+\end{document}

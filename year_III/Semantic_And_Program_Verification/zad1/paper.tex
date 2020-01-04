@@ -1,0 +1,115 @@
+\documentclass[11pt]{article}
+
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage{floatflt,amsmath,amssymb}
+\usepackage[ligature, inference]{semantic}
+
+\title{Semantyka praca domowa}
+\author{Filip Plata}
+\date{\today}
+
+
+\begin{document}
+
+
+\maketitle
+
+\mathlig{->}{\rightarrow}
+\mathlig{|-}{\vdash}
+\mathlig{=>}{\Rightarrow}
+\mathligson
+
+\section{Opis}
+
+Podczas definiowania semantyki będziemy korzystać ze zbiorów
+
+\begin{itemize}
+\item LOC czyli zbioru lokacji na zmienne
+\item Env = VAR $\rightarrow$ LOC, środowisko
+\item CatchB = $\mathcal{P}(BExpr \times Env)$, skonczony zbiór wyrażeń catch wraz ze środowiskiem w którym zostały zdefiniowane
+\item S = Loc $\rightarrow \mathbb{N}$, czyli stan
+\item $I \times Env \times CatchB \times S \rightarrow S$, czyli relacja przejścia
+\end{itemize}
+
+Oprócz tego będę używał funkcji \textit{newloc} ze standardowym znaczeniem oraz funkcji 
+$\textit{checkAll} : CatchB \rightarrow S \rightarrow Bool$ która sprawdza, czy któryś z warunków logicznych jest spełniony dla środowiska, w którym został on zdefiniowany.
+
+Podczas pisania semantyki będziemy utrzymywać przydatny warunek, iż jeżeli wejdziemy do jakiejś instrukcji, to mamy ją wykonać (to oczywiście z punktu widzenia małych kroków, to stwierdzenie jest bardziej intuicyjne niz ścisłe). O to, by nie wykonać za dużo, będziemy dbać w regułach dla while i średnika.
+
+\section{Reguły semantyki}
+
+\begin{itemize}
+\item $<skip, \rho, Q, s> \longrightarrow s$
+
+\item $<x := e, \rho, Q, s> \longrightarrow s'$, gdzie $e$ ewalujuje sie do $n$, $\rho(x) = l$ oraz $s' = s[l\rightarrow n]$
+
+\item $<if \  b \  then \   I_{1} \    else \  I_{2}, \rho, Q, s>$
+, ewauluje się do wynku ewualuacji pierwszej z gałęzi lub drugiej, zależnie od wartości semantycznej \textit{b}, ze stanem, instrukcją, środowiskiem i zbiorem \textit{Q} przepisanymi wprost.
+Czyli w najbardziej ze standardowych sposobów.
+
+\item Dla instrukcji \textit{catch} jeśli:
+
+\begin{itemize}
+\item $<I, \rho, Q \cup \{(b, \rho)\}, s> \longrightarrow s'$
+\end{itemize}
+
+Wtedy $<catch \ b \  in \ I, \rho, Q, s> \longrightarrow s'$
+
+\item Semantyka deklaracji jest standardowa, jeśli:
+
+\begin{itemize}
+\item $<D, \rho, s> \longrightarrow (\rho', s')$
+\item $<I, \rho, Q, s'> \longrightarrow s''$
+\end{itemize}
+
+to $<begin \ D;I \ end, \rho, Q, s> \longleftrightarrow s''$
+
+\item Dla średnika sprawdzamy, czy po wykonaniu pierwszej instrukcji nie musimy przerwać obliczeń.
+
+\begin{itemize}
+\item $<I_{1}, \rho, Q, s> \rightarrow s'$
+\item $checkAll(Q, s') = true$
+\end{itemize}
+
+To $<I_{1};I_{2}, \rho, Q, s> \longrightarrow s'$. Z kolei gdy:
+
+\begin{itemize}
+\item $<I_{1}, \rho, Q, s> \rightarrow s'$
+\item $<I_{2}, \rho, Q, s'> \rightarrow s''$
+\item $checkAll(Q, s') = false$
+\end{itemize}
+
+To $<I_{1};I_{2}, \rho, Q, s> \longrightarrow s''$
+
+\item Jeśli powyżej \textit{checkAll} zwróci fałsz, to bierzemy stan \textit{s'} z ewaluacji pierwszej instrukcji i mając $<I_{2}, \rho, Q, s> \rightarrow s''$
+ewalujemy średnik do \textit{s''}
+
+\item Dla instrukcji \textit{while} jeśli warunek logiczny nie jest spełniony: przepisujemy niezmineiony stan
+
+\item Instrukcja \textit{while} gdy warunek jest spełniony
+\begin{itemize}
+\item $<I, \rho, Q, s> \longrightarrow s'$
+\item $checkAll(Q, s) \longrightarrow true$
+\end{itemize}
+
+Wtedy, ponieważ zaszedł warunek z catch:
+
+$<while \ b \  do \ I, \rho, Q, s> \longrightarrow s'$
+
+Natomiast jeśli sprwadzenie dało false, mamy regułę
+
+\begin{itemize}
+\item $<I, \rho, Q, s> \longrightarrow s'$
+\item $checkAll(Q, s) \longrightarrow false$
+\item $<while \ b \  do \ I, \rho, Q, s'> \longrightarrow s''$
+\end{itemize}
+
+To: $<while \ b \  do \ I, \rho, Q, s> \longrightarrow s''$
+
+\end{itemize}
+
+Taka semantyka nie jest optymalna pod wzgledem implementacji. Możnaby wykonywać mniej spradzeń warunków z instrukcji \textit{catch}, gdyby sprwadzać wszystkie warunki z catch tylko po przypisaniach.
+
+
+\end{document}

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+
+<VBox fx:id="view"
+	fx:controller="pl.edu.mimuw.forum.ui.controllers.ContentPaneController"
+	styleClass="details-box"
+	xmlns:fx="http://javafx.com/fxml">
+	<Label text="User:">
+		<graphic>
+			<ImageView>
+				<Image url="@../images/user.png" />
+			</ImageView>
+		</graphic>
+	</Label>
+	<TextField fx:id="userField" promptText="Enter user name..." />
+
+	<Label text="Comment:">
+		<graphic>
+			<ImageView>
+				<Image url="@../images/comment.png" />
+			</ImageView>
+		</graphic>
+	</Label>
+	<TextArea fx:id="commentField" promptText="Enter comment..." />
+</VBox>

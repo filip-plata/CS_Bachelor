@@ -1,0 +1,123 @@
+.tool-bar {
+	-fx-background-color: white;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: .9em 0.416667em .9em 0.416667em;
+    -fx-effect: dropshadow(two-pass-box,black,5,.2,0,0);
+}
+
+.details .label {
+	-fx-font-weight: bold;
+	-fx-font-size: 9pt;
+}
+
+.tool-bar .button, .flat-button {
+	-fx-font-family: Tahoma, Arial;
+	-fx-font-weight: bold;
+	-fx-text-fill: gray;
+	-fx-background-color: transparent, transparent, transparent, transparent;
+	-fx-padding: 1.0px;
+	-fx-font-size: 9pt;
+	-fx-border-color: transparent;
+    -fx-border-radius: 5px;
+}
+
+.tool-bar .button:hover, .flat-button:hover{
+    -fx-background-color: transparent, rgba(0.0,0.0,0.0,0.1), rgba(0.0,0.0,0.0,0.1), transparent;
+}
+
+.toolbar .button:armed, .flat-button:armed {
+    -fx-background-color: transparent, rgba(0.0,0.0,0.0,0.1), rgba(0.0,0.0,0.0,0.1), rgba(0.0,0.0,0.0,0.2);
+}
+
+
+.tool-bar .button {
+	-fx-content-display: top;
+}
+
+.tool-bar .separator {
+	-fx-padding: 0 0px 0 5px;
+}
+
+.details-box {
+	-fx-spacing: 5;
+}
+
+.text-area {
+	-fx-background-color: white;
+}
+
+.text-input {
+    -fx-background-radius: 0, 0;
+
+    -fx-background-color: #bababa, white;
+    -fx-background-insets: 0, 2;
+
+    -fx-prompt-text-fill: #9f9f9f;
+
+    -fx-highlight-fill: rgba(0.0,0.0,0.0,0.2);
+    -fx-highlight-text-fill: white;
+}
+
+.text-area .scroll-pane .viewport{
+    -fx-background-color: transparent;
+}
+
+.text-area .scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.text-area .content {
+	-fx-background-color: transparent;
+}
+
+.tab-pane {
+	-fx-background-color: white;
+}
+
+.tab-pane *.tab-header-background 
+{
+	-fx-background-color: white;
+	-fx-effect: innershadow(two-pass-box , rgba(0.0,0.0,0.0,0.6) , 4.0, 0.0 , 0.0 , 0.0);
+	
+}
+
+.details {
+	-fx-spacing: 5.0px;
+	-fx-padding: 10.0px;
+}
+
+.split-pane > .split-pane-divider {  
+    -fx-padding: 0.0 0.15em 0.0 0.15em;  
+}
+
+.tree_label VBox {
+	-fx-spacing: 0.0px;
+	-fx-padding: 0.0px;
+}
+
+.tree_label #type {
+	-fx-font-size: 12.0px;
+}
+
+.grayed_small {
+	-fx-font-size: 8.0px;
+	-fx-font-weight: normal;
+	-fx-opacity: 0.6;
+}
+
+.spacer {
+	-fx-min-width: 10.0px;
+	-fx-pref-width: 10.0px;
+	-fx-max-width: 10.0px
+}
+
+.bold {
+	-fx-font-weight: bold;
+}
+
+.combo-box .text-field {
+    -fx-prompt-text-fill: rgba(255.0, 0.0, 0.0, 0.5);
+}
+.combo-box .text-field:focused {
+    -fx-prompt-text-fill: transparent;
+}

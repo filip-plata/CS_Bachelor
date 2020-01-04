@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.image.Image?>
+<?import jfxtras.styles.jmetro8.ToggleSwitch?>
+
+<VBox fx:id="view"
+	fx:controller="pl.edu.mimuw.forum.ui.controllers.SurveyPaneController"
+	styleClass="details-box"
+	xmlns:fx="http://javafx.com/fxml">
+
+	<HBox alignment="BASELINE_LEFT">
+		<Button fx:id="upVoteButton" text="upvote" styleClass="flat-button">
+			<graphic>
+				<ImageView preserveRatio="true" fitWidth="30" smooth="true">
+					<Image url="@/images/thumbs-up.png" smooth="true"></Image>
+				</ImageView>
+			</graphic>
+		</Button>
+
+		<Region styleClass="spacer" />
+
+		<Button fx:id="downVoteButton" styleClass="flat-button">
+			<graphic>
+				<ImageView preserveRatio="true" fitWidth="30" smooth="true">
+					<Image url="@/images/thumbs-down.png" smooth="true"></Image>
+				</ImageView>
+			</graphic>
+		</Button>
+
+	</HBox>
+
+</VBox>

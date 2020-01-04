@@ -1,0 +1,6 @@
+buffer_start 0x8048faf
+ebp_ptr 0xffffcea8
+generate_boss_addr 08048af2
+stack_buff_addr 0xffffce56
+exploit_action_no -1073741828
+exploit_name \xf2\x8a\x04\x08

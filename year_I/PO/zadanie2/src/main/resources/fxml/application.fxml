@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+
+<BorderPane fx:id="mainPane" id="background" prefWidth="800.0" prefHeight="600.0"
+	fx:controller="pl.edu.mimuw.forum.ui.controllers.ApplicationController"
+	xmlns:fx="http://javafx.com/fxml">
+	<stylesheets>
+		<URL value="@/css/styles.css" />
+	</stylesheets>
+	<top>
+		<fx:include fx:id="toolbar" source="toolbar.fxml" />
+	</top>
+
+	<center>
+		<TabPane fx:id="tabPane" />
+	</center>
+</BorderPane>

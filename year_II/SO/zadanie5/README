@@ -1,0 +1,11 @@
+Zmian dokonałem w dwóch plikach:
+
+minix/servers/sched/schedule.c
+minix/servers/sched/schedproc.h
+
+Ilość globalnie dostępnych tokenów trzymana jest w zmiennej
+typu int64_t i zarządzanie nią jest dynamiczne.
+
+"Dodałem" dwa testy - są to większe wersje test0.sh
+na których widać różnice czasowe na moim laptopie
+(test0.sh często dawał 0).

@@ -1,0 +1,43 @@
+axiom squarebina: forall b : Z, a : Z, (b + a) ^ 2 = b ^ 2 + 2 * b * a + a ^ 2
+axiom onesquare: 1^2 = 1
+axiom four_sq: forall n : Z, 4*n^2 = (2*n)^2
+
+function zad3( n : Z ) : Z
+   	precondition n > 0
+   	postcondition zad3 = n^2
+   	var i : Z
+   	    z : Z
+            s : Z
+            p : Z
+            ks : Z
+begin
+   	i := 1
+   	{ n > 0 /\ i=1 }
+   	z := 1
+   	{ n>0 /\ i=1 /\ z=1 }
+   	while i < n do
+   	invariant i^2 = z /\ i <= n
+   	begin
+     		s := 1
+		{ i^2 = z /\ i <= n /\ s=1 }
+		p := 2*i
+		{ i^2 = z /\ i <= n /\ s=1 /\ p=2*i*s }
+		ks := 1
+		{ i^2 = z /\ i <= n /\ s=1 /\ p=2*i*s /\ ks=1 }
+		while i+s<=n do
+		invariant ks = s^2 /\ i^2 = z /\ i<=n /\ p=2*i*s
+		begin
+			z := z+p+ks
+			{ ks = s^2 /\ (i^2 = z - p - ks) /\ i+s<=n /\ 2*i*s=p }
+			i := i+s
+			{ ks = s^2 /\ i^2 = z /\ i<=n /\ (2*i*s - 2*s^2)=p }
+			ks := 4*ks
+			{ ks = 4*s^2 /\ i^2 = z /\ i<=n /\ (2*i*s - 2*s^2)=p }
+			p := 2*p+ks
+			{ ks = 4*s^2 /\ i^2 = z /\ i<=n /\ 4*i*s=p }
+			s := 2*s
+		end
+        end
+   	{ i=n /\ i^2=z}
+   	zad3 := z
+end

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pl"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <title>Wybory Prezydenta Rzeczpospolitej 2000</title>
+    <link rel="stylesheet"
+          href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+    <script type="text/javascript"
+            src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+    <link href="/staticfiles/wybory2000/css/base.css" rel="stylesheet" type="text/css">
+
+    <script src="/staticfiles/wybory2000/js/base.js"></script>
+
+
+    <link href="/staticfiles/wybory2000/css/region_results.css" rel="stylesheet" type="text/css">
+
+    <script src="/staticfiles/wybory2000/js/region_summary.js"></script>
+    <script src="/staticfiles/wybory2000/js/region_candidates.js"></script>
+    <script src="/staticfiles/wybory2000/js/subregions.js"></script>
+
+
+
+    <link href="/staticfiles/wybory2000/css/index.css" rel="stylesheet" type="text/css">
+
+    <script type="text/javascript"
+            src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['geomap']});
+      google.charts.setOnLoadCallback(drawMap);
+
+      function drawMap() {
+        var data = google.visualization.arrayToDataTable([
+          ['Country', 'Głosy', 'Codes'],
+                ['Podlaskie',
+                  '531998',
+                  '/region/20/'],
+                ['Podkarpackie',
+                  '	955463',
+                  '/region/18/'],
+                ['Zachodniopomorskie',
+                 '778434',
+                 '/region/32/'],
+                ['Wielkopolskie',
+                 '1658968',
+                 '/region/30/'],
+                ['Śląskie',
+                 '2248237',
+                 '/region/24/'],
+                ['Lubelskie',
+                 '993066',
+                 '/region/06/'],
+                 ['Małopolskie',
+                  '1490259',
+                  '/region/12/'],
+                 ['Pomorskie',
+                  '1017126',
+                  '/region/22/'],
+                 ['Kujawsko-Pomorskie',
+                  '972854',
+                  '/region/04/'],
+                 ['Dolnośląskie',
+                  '1368506',
+                  '/region/02/'],
+                 ['Warmińsko-Mazurskie',
+                  '624126',
+                  '/region/28/'],
+                 ['Lubuskie',
+                  '463370',
+                  '/region/08/'],
+                 ['Mazowieckie',
+                  '2424773',
+                  '/region/14/'],
+                 ['Świętokrzyskie',
+                  '593871',
+                  '/region/26/'],
+                 ['Łódzkie',
+                  '1261206',
+                  '/region/10/'],
+                 ['Opolskie',
+                  '416534',
+                  '/region/16/'],
+        ]);
+
+        var options = {};
+        options['dataMode'] = 'regions';
+        options['region'] = 'PL';
+
+        var container = document.getElementById('poland-map');
+        var geomap = new google.visualization.GeoMap(container);
+
+        google.visualization.events.addListener(geomap, 'select', function() {
+            var selectionIdx = geomap.getSelection()[0].row;
+            var regionURL = data.getValue(selectionIdx, 2);
+            window.location.href = regionURL;
+        });
+
+
+        geomap.draw(data, options);
+      };
+    </script>
+
+<body>
+
+
+    <div id="notification" style="display: none;">
+    </div>
+    <header>
+        <div id="pkw-logo">
+            <a href="/">
+                <img src="/media/img/logo_pkw.png" alt="Logo Państwowej Komisji Wyborczej">
+            </a>
+        </div>
+        <div id="header" class="patriotic-font">
+            <h2><em>Wybory Prezydenta</em><br>Rzeczpospolitej Polskiej</h2>
+        </div>
+        <div id="header-year" class="patriotic-font">
+            <h2>2000</h2>
+        </div>
+    </header>
+
+
+
+    <nav>
+        <ul>
+            <li><a href="/">Pierwsze głosowanie</a></li>
+            <li><a href="/gminy/">Wyszukiwarka Gmin</a></li>
+          </ul>
+    </nav>
+
+
+
+
+<div id="index-content">
+
+    <div id="poland-map">
+    </div>
+
+    <section id="votes-summary">
+        <h4 class="patriotic-font">Zbiorcze statystyki głosowania</h4>
+    </section>
+
+</div>
+
+
+
+        <section id="results-candidates">
+          <header>
+            <h4 class="patriotic-font">Wyniki wyborów</h4><br>
+            <p>Zobacz szczegóły klikając na nazwisko wybranego kandydata</p>
+          </header>
+
+          <table>
+              <thead>
+              <tr>
+                  <th>Lp</th>
+                  <th>Imię i nazwisko</th>
+                  <th>Liczba oddanych głosów</th>
+                  <th>Wynik wyborczy (%)</th>
+              </tr>
+              </thead>
+          </table>
+        </section>
+
+        <section id="subregions">
+
+          <h2>Legenda</h2>
+
+            <table>
+                <thead>
+                  <tr>
+                      <th>Nr</th>
+                      <th>Nazwa jednostki</th>
+                      <th>Głosy ważne</th>
+                      <th class="large-display">Wyniki procentowe</th>
+                      <th class="large-display">Liczba kart wydanych</th>
+                  </tr>
+                </thead>
+
+            </table>
+
+        </section>
+
+    <footer>
+        <div>
+            <img src="/media/img/logo_pkw_footer.png" alt="Stopka logo pkw">
+        </div>
+        <div>
+            Copyright @ 2017
+        </div>
+        <div>
+            Państwowa Komisja Wyborcza, ul. Wiejska 10, 00-902 Warszawa,
+            Tel. 22 695 25 44, Fax. 22 622 35 71
+            <br>
+            www.pkw.gov.pl
+        </div>
+        <div>
+            wykonanie: Filip Plata
+        </div>
+    </footer>
+
+
+
+
+
+</body></html>

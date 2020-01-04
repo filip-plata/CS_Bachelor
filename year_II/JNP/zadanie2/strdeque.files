@@ -1,0 +1,14 @@
+Makefile
+strdeque.cc
+strdeque.config
+strdeque.creator
+strdeque.files
+strdeque.h
+strdeque.includes
+strdequeconst.h
+strdequeconst.cc
+cstrdeque
+strdeque_test1.c
+strdeque_test2a.cc
+strdeque_test2b.cc
+cstrdequeconst
