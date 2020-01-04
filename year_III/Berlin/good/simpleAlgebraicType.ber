@@ -1,0 +1,9 @@
+data MaybeInt := Nothing | Just Int ;;
+
+isNothing x : MaybeInt ; Bool := case x of
+                   | Nothing  -> True |
+                   | Just (x)  -> False ;;
+
+main := isNothing (Just 4);;
+
+# Expected False : Bool

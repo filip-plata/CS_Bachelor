@@ -1,0 +1,34 @@
+*filter
+
+# Initiated inbound connections
+-A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+
+# All outbound connections
+-A OUTPUT -j ACCEPT
+
+# Open ports 80 and 9000-9010
+-A INPUT -p tcp --dport 80 -j ACCEPT
+-A INPUT -p tcp --match multiport --dports 9000:9010 -j ACCEPT
+
+# Allow ICMP
+-A INPUT -p icmp -m icmp --icmp-type 8 -j ACCEPT
+
+# Throttle ssh
+-A INPUT ! -s 10.0.0.0/24 -j REJECT # This one depends on network address
+-A INPUT -p tcp -m conntrack --ctstate NEW --dport 22 -m recent --set --name SSH
+-A INPUT -p tcp -m conntrack --ctstate NEW --dport 22 -m recent --update --seconds 60 --hitcount 10 --rttl --name SSH -j DROP
+-A INPUT -p tcp -m conntrack --ctstate NEW --dport 22 -j ACCEPT
+
+# loopback config
+-A INPUT -i lo -j ACCEPT
+-A INPUT ! -i lo -d 127.0.0.0/8 -j REJECT
+
+# DNS setup
+-A INPUT -p udp -m udp --dport 53 -j ACCEPT
+-A OUTPUT -p udp -m udp --sport 53 -j ACCEPT
+
+# Reject all other inbound
+-A INPUT -j REJECT
+-A FORWARD -j REJECT
+
+COMMIT

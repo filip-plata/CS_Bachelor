@@ -1,0 +1,5 @@
+data MaybeInt := Nothing | Just Int ;;
+
+main := case (Just 0) of
+  | x:(y) -> x |
+  | _ -> 0;;

@@ -1,0 +1,6 @@
+main := let x ; Int := 5  in
+       let add_x y : Int ; Int := x + y in
+       let x ; Int := 4 in
+       add_x 5 ;;
+
+# Expected 10

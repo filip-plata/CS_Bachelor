@@ -1,0 +1,120 @@
+entrypoints Program;
+
+-- tokens --------------------------------
+
+
+token AlgTypeIdent upper ((letter | digit | '_')*) ;
+token BIdent lower ((letter | digit | '_')*) ;
+token TypeVariable lower ((lower | digit)*) ;
+
+-- constants -----------------------------
+
+ConNum.     Constant ::= Numeral ;
+ConChar.    Constant ::= Char ;
+ConBool.    Constant ::= Boolean ;
+
+BoolTrue.   Boolean ::= "True" ;
+BoolFalse.  Boolean ::= "False" ;
+
+NumInt.      Numeral ::= Integer ;
+NumComplex.  Numeral ::= Complex ;
+
+IntComp.       Complex ::= Integer "i" ;
+
+-- types ---------------------------------
+
+FunType.    Type_specifier  ::= Type_specifier "->" Type_specifier1 ;
+ListType.   Type_specifier  ::= "[" Type_specifier "]" ;
+IntType.    Type_specifier1 ::= "Int" ;
+BoolType.   Type_specifier1 ::= "Bool" ;
+CharType.   Type_specifier1 ::= "Char" ;
+ComType.    Type_specifier1 ::= "Complex" ;
+AlgType.    Type_specifier1 ::= AlgTypeIdent ;
+PolyType.   Type_specifier1 ::= TypeVariable ;
+
+coercions Type_specifier 1 ;
+
+separator Type_specifier " " ;
+
+-- patterns ------------------------------
+
+PatternExpVar.   PatternExp ::= BIdent ;
+PatternExpl.     PatternExp ::= AlgTypeIdent [PatternExp1] ;
+PatternList.     PatternExp ::= PatternExp ":" PatternExp1 ;
+PatternListEm.   PatternExp ::= "[]" ;
+PatternDummy.    PatternExp ::= "_" ;
+
+coercions PatternExp 1 ;
+separator PatternExp1 " " ;
+
+-- expressions ---------------------------
+
+SListExp.   ListExp ::= "[" [HListExp] "]" ;
+
+SListHlp.   HListExp ::= Exp ;
+
+separator nonempty HListExp "," ;
+
+LetExp.        Exp ::= "let" [DecTer] "in" Exp ;
+CondExp.       Exp ::= "if" Exp1 "then" Exp1 "else" Exp1 ;
+MatchExp.      Exp ::= "case" Exp1 "of" [CasePattern] ;
+
+TypePattern.   CasePattern ::= "|" PatternExp "->" Exp1 ;
+
+separator nonempty CasePattern "|" ;
+
+AppExp.        Exp1 ::= Exp1 Exp2 ;
+InfAppExp.     Exp1 ::= Exp1 "`" BIdent "`" Exp2 ;
+
+LambdaExp.     Exp2 ::= "\\" BIdent "<" Type_specifier ">" "->" Exp3 ;
+
+EAdd.  Exp3  ::= Exp3 "+" Exp4 ;
+ESub.  Exp3  ::= Exp3 "-" Exp4 ;
+EMul.  Exp4  ::= Exp4 "*" Exp5 ;
+EDiv.  Exp4  ::= Exp4 "/" Exp5 ;
+ELeEq. Exp5  ::= Exp5 "<=" Exp6 ;
+EGrEq. Exp5  ::= Exp5 ">=" Exp6 ;
+ELe.   Exp5  ::= Exp5 "<" Exp6 ;
+EGr.   Exp5  ::= Exp5 ">" Exp6 ;
+EEq.   Exp5  ::= Exp5 "==" Exp6 ;
+
+CListExp.   Exp6 ::= Exp6 ":" Exp7 ;
+EListExp.   Exp7 ::= "[]" ;
+ETer.       Exp8  ::= ExpT ;
+
+coercions Exp 8 ;
+
+ConExpT. 	     ExpT ::= Constant ;
+VarExpT.       ExpT ::= BIdent ;
+ListExpT.      ExpT ::= ListExp ;
+AlgExpT.       ExpT ::= AlgTypeIdent ;
+
+-- declarations --------------------------
+
+AlgTypeDec.     AlgTypeConsDec ::= AlgTypeIdent [Type_specifier] ;
+
+separator nonempty AlgTypeConsDec "|" ;
+
+DecAlgType.     Dec ::= "data" AlgTypeIdent ":=" [AlgTypeConsDec] ;
+DecT.           Dec ::= DecTer;
+
+DecVal.         DecTer ::= BIdent ";" Type_specifier ":=" Exp ;
+DecFun.         DecTer ::= BIdent [Arg] ";" Type_specifier ":=" Exp ;
+
+ArgDef.     Arg ::= BIdent ":" Type_specifier ;
+
+separator nonempty Arg "," ;
+separator Dec ";;" ;
+separator nonempty DecTer ";" ;
+
+-- programs ------------------------------
+
+Load.     Module ::= "load" Ident ;
+
+separator Module ";;" ;
+
+Main.     Program ::= [Module] [Dec] "main" ":=" Exp ";;" ;
+
+-- comments ------------------------------
+
+comment "#" ;

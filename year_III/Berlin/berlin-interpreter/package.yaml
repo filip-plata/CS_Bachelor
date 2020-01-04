@@ -1,0 +1,52 @@
+name:                berlin-interpreter
+version:             0.1.0.0
+github:              "githubuser/berlin-interpreter"
+license:             BSD3
+author:              "Filip Plata"
+maintainer:          "fp371335@students.mimuw.edu.pl"
+copyright:           "2018 Filip Plata"
+
+extra-source-files:
+- README.md
+- ChangeLog.md
+
+# Metadata used when publishing your package
+# synopsis:            Short description of your package
+# category:            Web
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:         Please see the README on Github at <https://github.com/githubuser/berlin-interpreter#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+- array >= 0.5 && < 0.6
+- mtl >= 2.2 && <3
+- containers >= 0.5 && < 0.6
+- text-format-simple >= 1.0 && < 2.0
+
+library:
+  source-dirs: src
+
+executables:
+  berlin-interpreter-exe:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - berlin-interpreter
+
+tests:
+  berlin-interpreter-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - berlin-interpreter

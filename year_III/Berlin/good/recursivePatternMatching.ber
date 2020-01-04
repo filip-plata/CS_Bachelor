@@ -1,0 +1,7 @@
+data MaybeList := Just [Int] | Nothing;;
+
+main := case Just [1,2,3] of
+  | Just (x : (y)) -> y |
+  | _ -> [];;
+
+# Expected: [2,3]

@@ -1,0 +1,119 @@
+\documentclass[12pt]{article}
+
+\usepackage{verbatim}
+\usepackage{syntax}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\usepackage[polish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\selectlanguage{polish}
+
+\title{Specyfikacja jęzka 'Berlin'}
+\author{
+        Filip Plata \\
+        Uniwersytet Warszawski
+}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{Opis języka}
+Berlin to czysty funkcyjny język programowania. Jego składnia oparta jest na Standard ML/Haskellu. Jego własności są takie jak w opisie standardowego rozwiązania na 20 punkty jako języka funkcyjnego.
+
+Oprócz tego zawiera też literały dla liczb zespolonych, zatem:
+
+\begin{lstlisting}
+let x = 5i+2 in _
+\end{lstlisting}
+
+to poprawny kod który definiuje zmienną \textit{x} typu \textit{ComplexInt} w wyrażeniu które pominęliśmy.
+
+Formalna gramatyka znajduje się w przedostatniej sekcji.
+Na końcu znajduje się wypełniona tabela wymagań.
+Jeśli dobrze sparsowałem przykład, ogólne rekurencyjne typy algebraiczne są alternatywą(niewykluczającą) dla list dowolnego typu, więc całość byłaby na 20 punktów.
+Dodatkowo istnieje wsparcie dla aplikowania funkcji dwuargumentowych infixowo tak jak
+w Haskellu.
+
+Liczby zespolone mogę są type ComplexInt (oddzielnego od typów rzeczywistych).
+
+Ze względu na silne typowanie, nie mogą być one mieszane podczas operacji arytmetycznych. Arytmetyka jest wbudowana w język.
+
+Język nie obsługuje wejścia ani wyjścia, jako doskonale czysty język funkcyjny. Wynikiem jest ewaluacja głównego wyrażenia, które oznaczone jest `main` oraz na wypisaniu jego wartości na standardowe wyjście.
+
+W gramatyce jest pattern matching dla list. Najprawdopodobniej funkcje head, tail oraz empty będą zaimplementowane w krótkiej `bibliotece standardowej`.
+
+Można dokonywać deklaracji toplevel, należy je oddzielać ';;'. Będą one ewaluowane w kolejności zdefiniowania.
+
+Wszystkie deklaracje argumentów funkcji wymagają podania typów, a argumenty funkcji rozdzielane są za pomocą ','.
+
+Standardowe rozszerzenie pliku to `.ber`.
+
+Komentarze jednolinijkowe za pomocą `\#`.
+
+\section{Przykłady programów}
+
+\paragraph{Complex}
+
+Przykład arytmetyki na liczbach zespolonych
+
+\verbatiminput{good/complex.ber}
+
+\paragraph{Silnia}
+
+Podstawowy przykład funkcji rekurencyjnej
+
+\verbatiminput{good/factorial.ber}
+
+\paragraph{Funkcje wieloargumentowe}
+
+Prosta funkcja wieloargumentowa wraz z wywołaniem:
+
+\verbatiminput{good/multiargfunction.ber}
+
+\paragraph{Listy}
+
+Funkcja obliczająca długość listy:
+
+\verbatiminput{good/listLength.ber}
+
+\paragraph{Typowanie}
+
+Przykład źle otypowanego programu:
+
+\verbatiminput{bad/simpleInvalidTypes.ber}
+
+ze względu na różny typ $5i$ (ComplexInt) i $3$ (Int)
+
+\paragraph{Statyczne wiązanie}
+
+Statyczne wiązanie identyfikatorów:
+
+\verbatiminput{good/staticBind.ber}
+
+\paragraph{Funkcje anonimowe}
+
+Składnia dokładnie jak w Haskellu, poza typem identyfikatora wymaganym:
+
+\verbatiminput{good/lambda.ber}
+
+\paragraph{Częściowa aplikacja}
+
+\verbatiminput{good/partialApplication.ber}
+
+\paragraph{Typy algebraiczne}
+
+\verbatiminput{good/simpleAlgebraicType.ber}
+
+\section{Formalna gramatyka}
+
+Narzędzia nie zgłaszają konfliktów w gramatyce:
+
+\verbatiminput{grammar.bnfc}
+
+\section{Tabela wymagań}
+
+\verbatiminput{ocena-fun.txt}
+
+\end{document}

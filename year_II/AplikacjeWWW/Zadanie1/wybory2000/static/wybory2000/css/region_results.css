@@ -1,0 +1,146 @@
+#region-name {
+    margin: auto;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 2em;
+}
+
+#votes-summary {
+    width: 25vw;
+    margin: auto;
+}
+
+#votes-summary > h4 {
+    margin-top: 1vh;
+    text-align: center;
+}
+
+#votes-summary li {
+    min-height: 50px;
+    min-width: 80px;
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+    border-top: 1px solid;
+    list-style-position: inside;
+    border-color: lightgray;
+    list-style: none;
+}
+
+#votes-summary li > span {
+    float:right;
+}
+
+.candidate-results-bar {
+    width: 100%;
+    height: 100%;
+    background: white;
+    min-height: 2em;
+}
+
+.candidate-results-bar > div {
+    min-height: 2em;
+    height: 100%;
+    float: left;
+}
+
+#content {
+    margin-left: 5vw;
+    margin-right: 5vw;
+}
+
+#results-candidates > header {
+    margin-left: 5vw;
+    display: block;
+}
+
+.edit {
+
+}
+
+#subregions > div {
+    min-height: 4em;
+    display: flex;
+    flex-display: row;
+    flex-wrap: wrap;
+    margin: auto;
+}
+
+#subregions >  h2 {
+    margin-left: 5vw;
+}
+
+#subregions > div > div {
+    padding: 0.5em;
+    margin: auto;
+}
+
+#subregions > div div {
+    min-height: 2em;
+}
+
+
+#results-candidates > table td {
+    padding: 0.5vw;
+}
+
+#results-candidates > table tr {
+    border: 1px solid lightgray;
+    height: 4em;
+}
+
+.progress + div {
+    text-align: center;
+}
+
+#results-candidates > table {
+    width: 60vw;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 4vh;
+    margin-top: 4vh;
+}
+
+#subregions > table {
+    margin-top: 2vh;
+    margin-right: auto;
+    margin-left: auto;
+    width: 80vw;
+}
+
+#subregions > table tr {
+    border: 1px solid lightgray;
+    height: 4em;
+}
+
+#subregions > table th {
+    text-align: center;
+}
+
+#subregions > table td {
+    padding: 0.5vw;
+    text-align: center;
+}
+
+@media screen and (max-width: 995px) , screen and (max-height: 700px) {
+
+    #subregions > table {
+        width: 90vw;
+    }
+
+    #votes-summary li {
+        margin-top: 3vh;
+        margin-bottom: 3vh;
+    }
+
+    #votes-summary {
+        width: 60vw;
+    }
+
+    .large-display {
+       display: none;
+    }
+
+    #results-candidates > table {
+        width: 90vw;
+    }
+}

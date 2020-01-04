@@ -1,0 +1,3 @@
+main := let add x : Int, y : Int ; Int := x + y in 1 `add` 1 ;;
+
+# Expected 2

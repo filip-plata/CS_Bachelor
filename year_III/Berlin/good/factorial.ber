@@ -1,0 +1,6 @@
+factorial n : Int ; Int := if n <= 1 then n
+                     else n * (factorial (n - 1));;
+
+main := factorial 5 ;;
+
+# Expected 120 : Int

@@ -1,0 +1,6 @@
+f x : Int ; Int := x;;
+g x : Int ; Int := f x;;
+
+main := let f x : Int; Int := 100 * x in g 10;;
+
+# Expected 10

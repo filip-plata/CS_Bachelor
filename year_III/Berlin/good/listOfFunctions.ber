@@ -1,0 +1,11 @@
+add1 n : Int ; Int := n + 1;;
+add2 n : Int ; Int := n + 2;;
+
+map x : Int, fs : [Int -> Int] ; [Int] :=
+  case fs of
+  | (a:(b)) -> (a x) : (map x b) |
+  | [] -> [] ;;
+
+main := map 4 [add1, add2];;
+
+# Expected: [5, 6]

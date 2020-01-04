@@ -1,0 +1,325 @@
+diff -rupN minix/fs/mfs/read.c new-mfs/fs/mfs/read.c
+--- minix/fs/mfs/read.c	2017-05-26 23:33:43.068724881 +0200
++++ new-mfs/fs/mfs/read.c	2017-05-30 23:37:26.594094784 +0200
+@@ -11,6 +11,7 @@
+ #include <minix/minlib.h>
+ #include <sys/param.h>
+ #include <assert.h>
++#include <stdio.h>
+ 
+ 
+ static struct buf *rahead(struct inode *rip, block_t baseblock, u64_t
+@@ -34,9 +35,9 @@ int fs_readwrite(void)
+   int completed;
+   struct inode *rip;
+   size_t nrbytes;
+-  
++
+   r = OK;
+-  
++
+   /* Find the inode referred */
+   if ((rip = find_inode(fs_dev, fs_m_in.m_vfs_fs_readwrite.inode)) == NULL)
+ 	return(EINVAL);
+@@ -44,7 +45,7 @@ int fs_readwrite(void)
+   mode_word = rip->i_mode & I_TYPE;
+   regular = (mode_word == I_REGULAR || mode_word == I_NAMED_PIPE);
+   block_spec = (mode_word == I_BLOCK_SPECIAL ? 1 : 0);
+-  
++
+   /* Determine blocksize */
+   if (block_spec) {
+ 	block_size = get_block_size( (dev_t) rip->i_zone[0]);
+@@ -54,7 +55,7 @@ int fs_readwrite(void)
+   	f_size = rip->i_size;
+   }
+ 
+-  /* Get the values from the request message */ 
++  /* Get the values from the request message */
+   switch(fs_m_in.m_type) {
+   	case REQ_READ: rw_flag = READING; break;
+   	case REQ_WRITE: rw_flag = WRITING; break;
+@@ -69,7 +70,7 @@ int fs_readwrite(void)
+ 
+   /* If this is file i/o, check we can write */
+   if (rw_flag == WRITING && !block_spec) {
+-  	  if(rip->i_sp->s_rd_only) 
++  	  if(rip->i_sp->s_rd_only)
+ 		  return EROFS;
+ 
+ 	  /* Check in advance to see if file will grow too big. */
+@@ -87,7 +88,7 @@ int fs_readwrite(void)
+   if(block_spec && rw_flag == WRITING &&
+   	(dev_t) rip->i_zone[0] == superblock.s_dev && superblock.s_rd_only)
+ 		return EROFS;
+-	      
++
+   cum_io = 0;
+   /* Split the transfer into chunks that don't span two blocks. */
+   while (nrbytes > 0) {
+@@ -99,7 +100,7 @@ int fs_readwrite(void)
+ 		  if (position >= f_size) break;	/* we are beyond EOF */
+ 		  if (chunk > (unsigned int) bytes_left) chunk = bytes_left;
+ 	  }
+-	  
++
+ 	  /* Read or write 'chunk' bytes. */
+ 	  r = rw_chunk(rip, ((u64_t)((unsigned long)position)), off, chunk,
+ 	  	       nrbytes, rw_flag, gid, cum_io, block_size, &completed);
+@@ -116,20 +117,20 @@ int fs_readwrite(void)
+   fs_m_out.m_fs_vfs_readwrite.seek_pos = position; /* It might change later and
+ 						    the VFS has to know this
+ 						    value */
+-  
++
+   /* On write, update file size and access time. */
+   if (rw_flag == WRITING) {
+ 	  if (regular || mode_word == I_DIRECTORY) {
+ 		  if (position > f_size) rip->i_size = position;
+ 	  }
+-  } 
++  }
+ 
+   rip->i_seek = NO_SEEK;
+ 
+   if (lmfs_rdwt_err() != OK) r = lmfs_rdwt_err();	/* check for disk error */
+   if (lmfs_rdwt_err() == END_OF_FILE) r = OK;
+ 
+-  /* even on a ROFS, writing to a device node on it is fine, 
++  /* even on a ROFS, writing to a device node on it is fine,
+    * just don't update the inode stats for it. And dito for reading.
+    */
+   if (r == OK && !rip->i_sp->s_rd_only) {
+@@ -137,9 +138,9 @@ int fs_readwrite(void)
+ 	  if (rw_flag == WRITING) rip->i_update |= CTIME | MTIME;
+ 	  IN_MARKDIRTY(rip);		/* inode is thus now dirty */
+   }
+-  
++
+   fs_m_out.m_fs_vfs_readwrite.nbytes = cum_io;
+-  
++
+   return(r);
+ }
+ 
+@@ -158,17 +159,17 @@ int fs_breadwrite(void)
+ 
+   /* Pseudo inode for rw_chunk */
+   struct inode rip;
+-  
++
+   r = OK;
+ 
+   target_dev = fs_m_in.m_vfs_fs_breadwrite.device;
+-  
+-  /* Get the values from the request message */ 
++
++  /* Get the values from the request message */
+   rw_flag = (fs_m_in.m_type == REQ_BREAD ? READING : WRITING);
+   gid = fs_m_in.m_vfs_fs_breadwrite.grant;
+   position = fs_m_in.m_vfs_fs_breadwrite.seek_pos;
+   nrbytes = fs_m_in.m_vfs_fs_breadwrite.nbytes;
+-  
++
+   block_size = get_block_size(target_dev);
+ 
+   /* Don't block-write to a RO-mounted filesystem. */
+@@ -180,7 +181,7 @@ int fs_breadwrite(void)
+   rip.i_size = 0;
+ 
+   lmfs_reset_rdwt_err();
+-  
++
+   cum_io = 0;
+   /* Split the transfer into chunks that don't span two blocks. */
+   while (nrbytes > 0) {
+@@ -199,17 +200,36 @@ int fs_breadwrite(void)
+ 	  cum_io += chunk;	/* bytes read so far */
+ 	  position += chunk;	/* position within the file */
+   }
+-  
++
+   fs_m_out.m_fs_vfs_breadwrite.seek_pos = position;
+-  
++
+   if (lmfs_rdwt_err() != OK) r = lmfs_rdwt_err();	/* check for disk error */
+   if (lmfs_rdwt_err() == END_OF_FILE) r = OK;
+ 
+   fs_m_out.m_fs_vfs_breadwrite.nbytes = cum_io;
+-  
++
+   return(r);
+ }
+ 
++/*===========================================================================*
++*         is_zero                *
++*============================================================================*/
++
++static int is_zero(
++  char * buf, size_t size
++)
++{
++  /* Check whether block data is zero.
++  */
++  size_t i;
++  int res = 1;
++
++  for(i = 0; i < size; i++) {
++      if(buf[i] != '\0') res = 0;
++  }
++
++  return res;
++}
+ 
+ /*===========================================================================*
+  *				rw_chunk				     *
+@@ -236,6 +256,8 @@ int *completed;			/* number of bytes cop
+   dev_t dev;
+   ino_t ino = VMC_NO_INODE;
+   u64_t ino_off = rounddown(position, block_size);
++  char data[block_size];
++  int writing_zero_block = 0;
+ 
+   /* rw_flag:
+    *   READING: read from FS, copy to user
+@@ -269,11 +291,23 @@ int *completed;			/* number of bytes cop
+ 		}
+ 		return r;
+ 	} else {
++            if (rw_flag == WRITING && gid != -1) {
++                memset(data, '\0', block_size);
++                r = sys_safecopyfrom(VFS_PROC_NR, gid, (vir_bytes) buf_off,
++                                     (vir_bytes) data + off, (size_t) chunk);
++                
++                if (is_zero(data, block_size)) {
++                    writing_zero_block = 1;
++                }
++            }
++            if (writing_zero_block) {
++                return (r);
++            }
+ 		/* Writing to or peeking a nonexistent block.
+ 		 * Create and enter in inode.
+ 		 */
+-		if ((bp = new_block(rip, (off_t) ex64lo(position))) == NULL)
+-			return(err_code);
++            if ((bp = new_block(rip, (off_t) ex64lo(position))) == NULL)
++                return(err_code);
+ 	}
+   } else if (rw_flag == READING || rw_flag == PEEKING) {
+ 	/* Read and read ahead if convenient. */
+@@ -284,7 +318,7 @@ int *completed;			/* number of bytes cop
+ 	 * the cache, acquire it, otherwise just acquire a free buffer.
+ 	 */
+ 	n = (chunk == block_size ? NO_READ : NORMAL);
+-	if (!block_spec && off == 0 && (off_t) ex64lo(position) >= rip->i_size) 
++	if (!block_spec && off == 0 && (off_t) ex64lo(position) >= rip->i_size)
+ 		n = NO_READ;
+ 	if(block_spec) {
+ 		assert(ino == VMC_NO_INODE);
+@@ -298,7 +332,7 @@ int *completed;			/* number of bytes cop
+ 
+   /* In all cases, bp now points to a valid buffer. */
+   assert(bp != NULL);
+-  
++
+   if (rw_flag == WRITING && chunk != block_size && !block_spec &&
+       (off_t) ex64lo(position) >= rip->i_size && off == 0) {
+ 	zero_block(bp);
+@@ -310,13 +344,13 @@ int *completed;			/* number of bytes cop
+ 			   (vir_bytes) (b_data(bp)+off), (size_t) chunk);
+   } else if(rw_flag == WRITING) {
+ 	/* Copy a chunk from user space to the block buffer. */
+-	r = sys_safecopyfrom(VFS_PROC_NR, gid, (vir_bytes) buf_off,
+-			     (vir_bytes) (b_data(bp)+off), (size_t) chunk);
+-	MARKDIRTY(bp);
++		r = sys_safecopyfrom(VFS_PROC_NR, gid, (vir_bytes) buf_off,
++						 (vir_bytes) (b_data(bp)+off), (size_t) chunk);
++		MARKDIRTY(bp);
+   }
+-  
++
+   n = (off + chunk == block_size ? FULL_DATA_BLOCK : PARTIAL_DATA_BLOCK);
+-  put_block(bp, n);
++	put_block(bp, n);
+ 
+   return(r);
+ }
+@@ -438,7 +472,7 @@ int index;			/* index into *bp */
+ 	       (long) zone, index);
+ 	panic("check file system");
+   }
+-  
++
+   return(zone);
+ }
+ 
+@@ -483,13 +517,13 @@ unsigned bytes_ahead;		/* bytes beyond p
+   }
+ 
+   block_spec = (rip->i_mode & I_TYPE) == I_BLOCK_SPECIAL;
+-  if (block_spec) 
++  if (block_spec)
+ 	dev = (dev_t) rip->i_zone[0];
+-  else 
++  else
+ 	dev = rip->i_dev;
+ 
+   assert(dev != NO_DEV);
+-  
++
+   block_size = get_block_size(dev);
+ 
+   block = baseblock;
+@@ -573,7 +607,7 @@ unsigned bytes_ahead;		/* bytes beyond p
+ 	block++;
+ 	position_running += block_size;
+ 
+-	if(!block_spec && 
++	if(!block_spec &&
+ 	  (thisblock = read_map(rip, (off_t) ex64lo(position_running), 1)) != NO_BLOCK) {
+ 	  	bp = lmfs_get_block_ino(dev, thisblock, PREFETCH, rip->i_num, position_running);
+ 	} else {
+@@ -625,8 +659,8 @@ int fs_getdents(void)
+   /* Check whether the position is properly aligned */
+   if( (unsigned int) pos % DIR_ENTRY_SIZE)
+ 	  return(ENOENT);
+-  
+-  if( (rip = get_inode(fs_dev, ino)) == NULL) 
++
++  if( (rip = get_inode(fs_dev, ino)) == NULL)
+ 	  return(EINVAL);
+ 
+   block_size = rip->i_sp->s_block_size;
+@@ -653,7 +687,7 @@ int fs_getdents(void)
+ 	  else
+ 		  dp = &b_dir(bp)[0];
+ 	  for (; dp < &b_dir(bp)[NR_DIR_ENTRIES(block_size)]; dp++) {
+-		  if (dp->mfs_d_ino == 0) 
++		  if (dp->mfs_d_ino == 0)
+ 			  continue;	/* Entry is not in use */
+ 
+ 		  /* Compute the length of the name */
+@@ -662,7 +696,7 @@ int fs_getdents(void)
+ 			  len = sizeof(dp->mfs_d_name);
+ 		  else
+ 			  len = cp - (dp->mfs_d_name);
+-		
++
+ 		  /* Compute record length; also does alignment. */
+ 		  reclen = _DIRENT_RECLEN(dep, len);
+ 
+@@ -683,7 +717,7 @@ int fs_getdents(void)
+ 
+ 		if (tmpbuf_off + reclen >= GETDENTS_BUFSIZE*GETDENTS_ENTRIES) {
+ 			  r = sys_safecopyto(VFS_PROC_NR, gid,
+-			  		     (vir_bytes) userbuf_off, 
++			  		     (vir_bytes) userbuf_off,
+ 					     (vir_bytes) getdents_buf,
+ 					     (size_t) tmpbuf_off);
+ 			  if (r != OK) {
+@@ -742,4 +776,3 @@ int fs_getdents(void)
+   put_inode(rip);		/* release the inode */
+   return(r);
+ }
+-

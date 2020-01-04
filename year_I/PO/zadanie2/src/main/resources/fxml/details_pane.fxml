@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.image.Image?>
+
+<VBox fx:controller="pl.edu.mimuw.forum.ui.controllers.DetailsPaneController"
+	styleClass="details" xmlns:fx="http://javafx.com/fxml">
+
+	<fx:include fx:id="task" source="task_pane.fxml" />
+
+	<fx:include fx:id="content" source="content_pane.fxml" />
+
+	<fx:include fx:id="suggestion" source="suggestion_pane.fxml" />
+
+	<fx:include fx:id="survey" source="survey_pane.fxml" />
+
+</VBox>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.image.Image?>
+<?import jfxtras.styles.jmetro8.ToggleSwitch?>
+
+<VBox fx:id="view" styleClass="details-box"
+	fx:controller="pl.edu.mimuw.forum.ui.controllers.SuggestionPaneController"
+	xmlns:fx="http://javafx.com/fxml">
+
+	<Separator orientation="HORIZONTAL" />
+
+	<Label text="Suggestion:">
+		<graphic>
+			<ImageView>
+				<Image url="@../images/light-bulb.png" />
+			</ImageView>
+		</graphic>
+	</Label>
+
+
+
+	<TextArea fx:id="suggestionField" promptText="Enter suggestion..." />
+
+	<HBox alignment="BASELINE_LEFT">
+		<ToggleSwitch fx:id="acceptableField" selected="false"
+			turnOffText="Is acceptable?" turnOnText="Is acceptable2?" />
+	</HBox>
+
+</VBox>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.collections.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import pl.edu.mimuw.forum.ui.controllers.* ?>
+
+
+<Dialog fx:id="dialog"
+	fx:controller="pl.edu.mimuw.forum.ui.controllers.DialogController"
+	xmlns:fx="http://javafx.com/fxml">
+	<dialogPane>
+		<DialogPane prefWidth="400.0" prefHeight="300.0">
+			<stylesheets>
+				<URL value="@/css/styles.css" />
+			</stylesheets>
+			
+			<content>
+				<VBox>
+					<fx:include fx:id="details" source="details_pane.fxml" />
+					<!-- <ComboBox fx:id="ComboBox">
+						<items>
+        					<FXCollections fx:factory="observableArrayList">
+          						<String fx:value="Comment" />
+          						<String fx:value="Task" />
+          						<String fx:value="Survey" />
+          						<String fx:value="Suggestion" />
+        					</FXCollections>
+     					 </items>
+					</ComboBox> -->
+				</VBox>
+			</content>
+		</DialogPane>
+	</dialogPane>
+</Dialog>

@@ -1,0 +1,123 @@
+% --------------------------------------------------------------
+% This is all preamble stuff that you don't have to worry about.
+% Head down to where it says "Start here"
+% --------------------------------------------------------------
+ 
+\documentclass[12pt]{article}
+ 
+\usepackage[margin=1in]{geometry} 
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage{physics}
+
+ 
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+ 
+\newenvironment{theorem}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{lemma}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{exercise}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{reflection}[2][Reflection]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{proposition}[2][Proposition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+\newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+ 
+\begin{document}
+ 
+% --------------------------------------------------------------
+%                         Start here
+% --------------------------------------------------------------
+ 
+%\renewcommand{\qedsymbol}{\filledbox}
+ 
+\title{Zadanie 5}%replace X with the appropriate number
+\author{Filip Plata\\ %replace with your name
+RRZ} %if necessary, replace with your course title
+ 
+\maketitle
+ 
+\begin{proof} %You can use theorem, proposition, exercise, or reflection here.  Modify x.yz to be whatever number you are proving
+Zaczniemy od wprowadzenia układu współrzędnych (X, Y). Kot będzie się poruszał wzdłuż osi X, zatem jego położenie w chwili t będzie: 
+
+$ (x_{0} + v \cdot t, 0) $
+
+Wybierzmy dodatkowo $x_{0} = 0$
+
+Dla psa równania możemy napisać w postaci:
+
+\begin{gather*} 
+\dot y = - \frac{y}{r} \cdot u \\
+\dot x = \frac{v \cdot t - x}{r} \cdot u
+\end{gather*}
+
+gdzie y, x to współrzędne psa (zależne od czasu), natomiast r to odległość psa od kota w chwili t (rysujemy na kartce trójkat kot-pies-rzut psa na oś X i stąd widać te zależności).
+
+Zaczniemy od rozwiązania tego układu, dzielimy stronami aby pozbyć się odległości - tracimy z opisu sytuację gdy pies znajduje się na osi OX na początku - ale to jest bardzo proste:
+
+\[ \frac{\dot x}{\dot y} = - \frac{v \cdot t - x}{y} \]
+
+Teraz "skracamy dt" (czyli traktujemy x jako funkcję y i korzystamy z tożsamości $\dv{x}{t} = \dv{x}{y} \cdot \dv{y}{t} $), zapisujemy $\dv{x}{y} = x'$ i otrzymujemy:
+\[ x' = - \frac{v \cdot t - x}{y} \]
+
+co przepisujemy do:
+
+\[ x' \cdot y + v \cdot t - x = 0 \]
+
+Czasu pozbywamy się pisząc $ u \cdot t = \int{\sqrt{1 + (x')^2}} dy $ bo czas jest w prosty sposób powiązany z odległością przebytą przez psa. Wstawiamy to wyżej i różniczkujemy po y, dostajemy:
+
+\[ x''y + x' - \frac{v}{u} \cdot \sqrt{1 + (x')^2} - x' = 0 \]
+
+Czyli po podstawieniu $ k = \frac{v}{u} $ mamy
+
+\[ x''y - k \cdot \sqrt{1 + (x')^2} = 0 \]
+
+Co przepisujemy po podstawiniu $ z = x' $ do (ponownie dzielimy przez y, ale więcej już nie możemy w zwiazku z tym stracić)
+
+\[ \frac{z'}{k \cdot \sqrt{1 + z^2}} = \frac{1}{y} \]
+
+Całkujemy po y stronami, internet(albo tablice) mówi że całka po lewej to odwrotność sinusa hiperbolicznego:
+
+\[ z = \sinh{(k \cdot \ln{\abs{y}} + C_{1})} \]
+
+Napiszemy to rozpisujacy sinus hiperboliczny i pisząc $e^(C_{1}) = A$:
+
+\[ 2z = \abs{y}^k \cdot A - \frac{1}{\abs{y}^k \cdot A} \]
+
+Znowu całkujemy stronami po y, dostajemy (mamy $ k < 1 $ i korzystamy z tego):
+
+\[ 2x + C_{2} = (\abs{y})^{k+1} \cdot \frac{A}{k+1} - \frac{(\abs{y})^{1-k}}{A \cdot (1-k)}\]
+
+Stałą $C_{1}$ wyznaczamy z początkowej wartości z ($ \frac{x_0}{y_0}$) z równania na z(dostaniemy równanie kwadratowe na A), a $C_{2}$ wprost z równania na krzywą.
+
+Natomiast czas wyznaczamy z uzytego wcześniej równania:
+
+\[ u \cdot t = \int{\sqrt{1 + (x')^2}} dy \]
+
+Przez $T$ oznaczymy całkowity czas do złapania, wtedy mamy w granicach na całkę:
+
+\[ u \cdot T = \int_{0}^{y_0} \sqrt{1 + z^2} dy\]
+
+Skąd otrzymujemy:
+
+\[ u \cdot T = \int_{0}^{y_0} \sqrt{\cosh(z)^2} \]
+
+Czyli po podstawieniu za z: 
+
+\[ u \cdot T = \int_{0}^{y_0} \abs{y}^k \cdot A + \frac{1}{\abs{y}^k \cdot A} dy \]
+
+Ostatecznie:
+
+\[ T = \frac{1}{u} \cdot (\frac{\abs{y_0}^{k+1}}{k+1} \cdot A + \frac{\abs{y_0}^{1-k}}{A \cdot (1-k)}) \]
+
+Jeśli pies ma $y_0 = 0$, wtedy porusza się po prostej a czas wynosi $\frac{\abs{x_0}}{u \pm v}$ gdzie znak zależy od tego czy pies jest przed, czy za kotem.
+
+\end{proof}
+ 
+ 
+\end{document}

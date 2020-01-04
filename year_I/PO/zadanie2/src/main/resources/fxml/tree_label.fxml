@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+
+<fx:root type="TreeCell" styleClass="tree_label" xmlns:fx="http://javafx.com/fxml">
+	<graphic>
+		<VBox fx:id="pane">
+			<Label fx:id="type" styleClass="bold"/>
+			<HBox styleClass="grayed_small">
+				<Label>Author:</Label>
+				<Label fx:id="author" textOverrun="ELLIPSIS" styleClass="bold"></Label>
+			</HBox>
+		</VBox>
+	</graphic>
+</fx:root>

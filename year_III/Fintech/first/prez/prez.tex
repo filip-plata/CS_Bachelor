@@ -1,0 +1,308 @@
+\documentclass{beamer}
+
+\usepackage{default}
+\usepackage[MeX]{polski}
+\usepackage[utf8]{inputenc}
+
+\usetheme{Boadilla}
+\usecolortheme{seahorse}
+
+\usepackage{pgfpages}
+%\setbeamertemplate{note page}[plain]
+%\setbeameroption{show notes on second screen=right}
+\setbeameroption{hide notes}
+%\setbeameroption{show only notes}
+
+
+
+\graphicspath{{../img/}}
+
+% \ImgH{ile wysokości slajdu ma zajmować}{zdjęcie}
+\newcommand{\ImgH}[2]{
+	\begin{center}
+		\includegraphics[height=#1\paperheight,keepaspectratio]{#2}
+	\end{center}
+}
+
+% \ImgW{ile szerokości slajdu ma zajmować}{zdjęcie}
+\newcommand{\ImgW}[2]{
+	\begin{center}
+		\includegraphics[width=#1\linewidth,keepaspectratio]{#2}
+	\end{center}
+}
+
+\newcommand{\Title}[1]{\begin{center}{\LARGE \textbf{#1}}\end{center}}
+
+
+
+\title{Hawala i Crowdfunding w Islamie}
+%\subtitle{}
+\author{Mateusz Banaszek, Filip Plata}
+\date{6 listopada 2017}
+
+
+\begin{document}
+
+	\frame{ \titlepage
+	}
+
+%====================================================================
+\section{Hawala}
+	\frame{
+		\Title{Hawala}
+	}
+
+	\frame{	\frametitle{Jak robiono przelewy tysiąc lat temu?}
+		Zabieranie znacznej ilości pieniędzy w podróż jest niebezpieczne
+		\begin{itemize}
+			\item bandyci na popularnych szlakach handlowych
+			\item mogą zatonąć razem ze statkiem
+			\item można je zgubić...
+		\end{itemize}
+	}
+
+	\frame{ \frametitle{Rozwiązanie kupców muzułmańskich}
+		Hawala - czyli przeniesienie, zaufanie.
+		Umożliwia dostęp do środków bez fizycznego transportu.
+		Oparta na sieci społecznej ludzi zwanych "hawaladars" - w
+		przeszłości często członków rodziny, klanu, grupy
+		etnicznej.
+		Zjawisko nie jest małe - w Somalii odpowiada za
+		przepływ około 1.6 miliarda dolarów rocznie.
+	}
+
+	\frame{ \frametitle{Jak to działa}
+		Klient A zgłasza się do lokalnego hawaladara i daje
+		mu pieniądze, które chce przekazać osobie B w innym
+		miejscu, najczęściej razem z hasłem.
+		Hawaladar kontaktuje się innym hawaladarem
+		(obecnie przez telefon, fax, email), który da pieniądze
+		odbiorcy, gdy ten się zjawi i poda hasło.
+	}
+
+	\frame{ \frametitle{Obrazek działania}
+		\ImgH{0.8}{hawala}
+	}
+
+	\frame{ \frametitle{Jak rozliczają się halawadarzy?}
+		\begin{itemize}
+			\item Transakcje w obie strony
+			\item W przypadku  wyraźnego przepływu gotówki w jedną
+			stronę (Indie - UK) - towarami
+		\end{itemize}
+	}
+
+	\frame{ \frametitle{Przykładowa firmy}
+			Dahabshiil - \url{https://www.dahabshiil.com}
+			\ImgH{0.8}{edahab-picture}
+	}
+
+	\frame{ \frametitle{Zalety Hawali}
+		\begin{itemize}
+			\item Tania - opłaty około 0.2\% do 0.5\% pomiędzy miastami, 6\% - jedna z większych firm za przelew do dowolnego miejsca (24 000 do wyboru)
+			\item Hawaladarzy mogą rozliczyć się jak chcą -
+			mogą stosować realne zamiast oficjalnych kursów
+			wymiany walut
+			\item Można dotrzeć tam, gdzie przelew bankowy nie
+			dotrze - Somalia, część Afganistanu, niektóre kraje
+			Afryki
+			\item Brak regulacji prawnych, opiera się tylko na
+			dogadaniu się dwóch podmiotów - w przypadku mniejszych
+			hawaladars, często ludzi
+			\item Dodatkowe zajęcie dla lokalnych biznesów
+			\item W wielu krajach nieopodatkowane
+			\item Niski koszt - telefon, email
+		\end{itemize}
+	}
+
+	\frame{ \frametitle{I wady}
+		\begin{itemize}
+			\item Oparcie tylko na zaufaniu
+			\item Umożliwia pranie pieniędzy (piraci z Somalii podobno wysyłali tak dużo pieniędzy do Kenii)
+			\item Niektóre zachodnie rządy (USA) patrzą bardzo podejrzliwie na taką działalność - zamykanie większych firm tego typu, zatrzymywanie ich pracowników jako terrorystów (Al-Barakat)
+			\item Często brak żadnej kontroli, może być bardzo wygodne do prania pieniędzy
+		\end{itemize}
+	}
+
+	\frame{ \frametitle{Podsumowanie}
+		Praktyczny i działający system w rejonach świata, gdzie
+		brak jest rozwiniętego systemu bankowego.
+		Pralnia pieniędzy (?)
+	}
+
+
+%====================================================================
+\section{Crowdfunding}
+	\frame{
+		\Title{Instrumenty finansowe / umowy / metody}
+	}
+
+	\frame{ \frametitle{Problem}
+		Dlaczego nie ,,zachodnie'' rozwiązania?
+		\begin{itemize}
+			\item odsetki
+			\item oprocentowanie
+			\item lichwa
+			\item ustalony stały zwrot inwestycji
+			\bigskip
+			\item Przedmiot/towar/usługa/\ldots zgodna z Szariatem
+		\end{itemize}
+	}
+
+	\frame{ \frametitle{Murabaha}
+		\begin{itemize}
+			\item Murabaha = cost plus profit
+			\item ,,Zakup na kredyt''
+			\item Np. bank i klient
+			\item Umowy:
+				\begin{itemize}
+					\item Zamówienie z przyrzeczeniem odkupu
+					\item 2 kontrakty sprzedaży
+				\end{itemize}
+			\item Warunki, m.in.:
+				\begin{itemize}
+					\item Sprzedawca ma przedmiot w momencie zawarcia umowy
+					\item Ustalona i niezmienna cenna
+					\item Ustalony czas dostawy
+					\item Ustalony harmonogram spłat
+				\end{itemize}
+		\end{itemize}
+	}
+
+	\frame{ \frametitle{Murabaha}
+		\ImgH{0.8}{Murabaha_Brochure_002}
+	}
+
+
+	\frame{ \frametitle{Mudharabah}
+		\begin{itemize}
+			\item Mudharabah = profit-sharing arrangement
+			\item Umowa między:
+				\begin{itemize}
+					\item inwestor: pieniądze
+					\item przedsiębiorca: wiedza, umiejętności
+				\end{itemize}
+			\item Podział zysku ustalony na początku (np. 50:50, 60:40)
+			\item A jak się nie uda?
+				\begin{itemize}
+					\item inwestor: traci pieniądze
+					\item przedsiębiorca: czas, pracę, renomę, \ldots
+				\end{itemize}
+			\item \textbf{Przedsiębiorca nie gwarantuje zysku inwestorowi}\\ -- wszyscy dzielą ryzyko
+		\end{itemize}
+
+	}
+
+	\frame{ \frametitle{Mudharabah}
+		\ImgH{0.8}{Mudaraba}
+	}
+
+	\frame{ \frametitle{Musharakah}
+		\begin{itemize}
+			\item Musharakah = joint enterprise
+			\item Podział zysku i strat
+		\end{itemize}
+		\ImgH{0.7}{Musharaka2}
+
+	}
+
+	\frame{
+		\Title{Crowdfunding w Islamie}
+	}
+
+	\frame{ \frametitle{Rodzaje crowdfundingu}
+		\begin{itemize}
+			\item \underline{Lending-based (P2P)}
+			\item Donation-based
+			\item Reward-based
+			\item Equity-based
+		\end{itemize}
+	}
+
+	\frame{ \frametitle{Lending-based zgodne z Szariatem}
+		\begin{itemize}
+			\item Bez oprocentowania
+			\item Inwestor daje pieniądze
+			\item Przedsiębiorca daje wiedzę, pracę
+			\item Inwestor (może) zarobi
+			\item Przedsiębiorca nie oddaje praw, udziałów itp.
+		\end{itemize}
+	}
+
+	\frame{ \frametitle{Lending-based zgodny z Szariatem}
+		\begin{center}
+			Potrzebujemy zebrać kapitał na nasze przedsięwzięcie?
+
+			\textbf{Mudharabah (profit-sharing arrangement)}
+		\end{center}
+	}
+
+	\frame{ \frametitle{www.ethiscrowd.com}
+		\ImgH{0.8}{PROJECT-DEVELOPER-1}
+
+	}
+	\frame{ \frametitle{www.ethiscrowd.com}
+		\ImgH{0.8}{fsac-dhariah-commitee2}
+
+	}
+
+
+	\frame{ \frametitle{Lending-based zgodny z Szariatem}
+		\begin{center}
+			Potrzebujemy zebrać pieniądze na zakupy dla naszego przedsięwzięcia?
+
+			\textbf{Murabaha (cost plus profit)}
+		\end{center}
+	}
+
+
+	\frame{ \frametitle{www.beehive.ae}
+		\ImgH{0.8}{Tradeflow-chart}
+	}
+
+	\frame{ \frametitle{www.beehive.ae}
+		\ImgW{0.8}{certificate}
+	}
+
+	\frame{ \frametitle{www.beehive.ae}
+		\ImgW{1}{supervisory_board}
+	}
+
+	\frame{ \frametitle{kapitalboost.com}
+		\ImgW{1}{new_murabaha}
+
+	}
+
+	\frame{ \frametitle{kapitalboost.com}
+		\ImgW{1}{press_release}
+
+	}
+
+	\frame{ \frametitle{www.liwwa.com}
+		\ImgW{1}{liwwa_faq}
+	}
+
+
+%====================================================================
+\section{Koniec}
+	\frame{	\frametitle{}
+		\begin{center}
+			\Huge{Pytania?}
+		\end{center}
+	}
+
+	\frame{	\frametitle{Polecamy}
+		Grafiki i informacje:
+		\begin{itemize}
+			\item \url{https://en.wikipedia.org/wiki/Profit_and_loss_sharing}
+			\item \url{https://mfiles.pl/pl/index.php/Murabaha}
+			\item \url{https://www.dmcc.ae/gateway-to-trade/financial-services/tradeflow}
+			\item \url{www.ethiscrowd.com}
+			\item \url{kapitalboost.com}
+			\item \url{www.beehive.ae}
+			\item \url{https://en.wikipedia.org/wiki/Hawala}
+
+		\end{itemize}
+	}
+
+\end{document}

@@ -1,0 +1,68 @@
+\documentclass[12pt]{article}
+
+\usepackage{verbatim}
+\usepackage{syntax}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\usepackage[polish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\selectlanguage{polish}
+
+\title{Projekt na przedmiot Języki i Narzędzia Programowania}
+\author{
+        Filip Plata \\
+        Uniwersytet Warszawski
+}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{Twórcy}
+
+\begin{itemize}
+\item Filip Plata
+\end{itemize}
+
+\section{Opis projektu}
+
+Aplikacja pozwalająca na reagowanie na wydarzenia na giełdzie - o roboczej nazwie stockalert.
+
+Głównie pomyślana w tym momencie właśnie do notyfikacji w reakcji na zmiany cen akcji, wedle zdefiniowanych alertów.
+
+Wstępnie do notyfikowania poprzez wysyłanie emaili w reakcji na przekroczenie przez papier wartościowy pewnej górnej lub dolnej granicy.
+Możliwy kierunek rozszerzenia to notyfikacje na urządzenia mobilne.
+
+Te funkcjonalności powyżej, choć proste, już nie są proste do uzyskania z darmowych narzędzi. Również typy zleceń na giełdę z aktywacją cenową są znacznie mniej elastyczne niż sama notifikacja, bo nie uwzględniają dynamiki cen.
+
+Oprócz tego, architektura jest pomyślana rozszerzalnie, może dojść więcej serwisów procesujących ceny niż samo sprawdzanie górnych/dolnych granic.
+
+\section{Architektura}
+
+Aplikacja podzielona jest na trzy mikroserwisy, korzystające ze wspólnej (w sensie instancji serwera) bazy danych. Do części komunikacji wewnętrznej wykorzystywany jest RabbitMQ.
+
+Notifier - zajmuje się notyfikowaniem użytkownika o wykrytych zdarzeniach. W pierwszej iteracji będzie wysyłał email. Komunikuje się poprzez RabbitMQ.
+
+Thresholdalert - jest informowany o nowych cenach na giełdzie i przetwarza je pod kątem spadku/wzrostu przebijającego zdefiniowane przez użytkonika poziomy. Informowanie o nowych danych odybwa się poprzez RabbitMQ, następnie wyceny są pobierane po HTTP.
+
+StockData - pobiera dane z jednego ustalonego źródła i zapisuje je do bazy. Po pobraniu danych informuje mikroserwis(y) przetwarzające o nowych danych i podaje ich lokację (czyli URL). Oprócz tego posiada dane o użytkownikach.
+
+Wszystkie dane mikroserwisów są od siebie logicznie oddzielone.
+
+Nie bedzie żadnych zabezpieczeń API - dałoby to tylko narzut implementacyjny.
+
+\section{Technologie}
+
+Do implementacji serwisów zostanie użyty Python, ze względu na łatwość i szybkość implementacji. Była rozważana Akka (Http), jednakże wtedy program wyszedłby mało `mikroserwisowy`.
+
+ThresholdAlert ma być we Flasku, a StockData w Django wraz z licznymi pod-frameworkami. Wybór dobrany był pod stopień złożoności zadań wykonywanych przez serwisy.
+
+Bazą danych będzie Postgres, gdyż z moich doświadczeń to najbardziej solidny darmowy (a pewnie i nie tylko) RDBMS, a także gdyż jest dostępny na AWS. Każdy serwis bedzie w dockerze. Całość zostanie docelowo uruchomiona na AWS.
+
+RabbitMQ jest dla dodania asynchroniczności i lepszego rozdzielenia działalności serwisów od siebie.
+
+Frontend nie jest przewidziany, aczkolwiek może zostać dopisany - wtedy najprawdopodobniej byłby oparty o React - a na pewno tylko o komunikację REST z mikroserwisami.
+
+
+\end{document}

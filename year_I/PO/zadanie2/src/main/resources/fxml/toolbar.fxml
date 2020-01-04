@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.control.Separator?>
+
+<ToolBar fx:controller="pl.edu.mimuw.forum.ui.controllers.ToolbarController"
+	xmlns:fx="http://javafx.com/fxml">
+	<items>
+		<HBox styleClass="">
+			<Button fx:id="newButton" text="New">
+				<tooltip>
+					<Tooltip text="Create a new forum" />
+				</tooltip>
+				<graphic>
+					<ImageView>
+						<Image url="@../images/blank-file.png"/>
+					</ImageView>
+				</graphic>
+			</Button>
+
+			<Button fx:id="openButton" text="Open">
+				<tooltip>
+					<Tooltip text="Open a file" />
+				</tooltip>
+				<graphic>
+					<ImageView >
+						<Image url="@../images/open.png"/>
+					</ImageView>
+				</graphic>
+			</Button>
+
+			<Button fx:id="saveButton" text="Save">
+				<tooltip>
+					<Tooltip text="Save to file" />
+				</tooltip>
+				<graphic>
+					<ImageView >
+						<Image url="@../images/save.png"/>
+					</ImageView>
+				</graphic>
+			</Button>
+
+			<Separator orientation="VERTICAL" />
+
+			<Button fx:id="undoButton" text="Undo">
+				<tooltip>
+					<Tooltip text="Undo operation" />
+				</tooltip>
+				<graphic>
+					<ImageView >
+						<Image url="@../images/undo.png"/>
+					</ImageView>
+				</graphic>
+			</Button>
+
+			<Button fx:id="redoButton" text="Redo">
+				<tooltip>
+					<Tooltip text="Redo operation" />
+				</tooltip>
+				<graphic>
+					<ImageView >
+						<Image url="@../images/redo.png"/>
+					</ImageView>
+				</graphic>
+			</Button>
+
+			<Separator orientation="VERTICAL" />
+
+			<Button fx:id="addNodeButton" text="Add">
+				<tooltip>
+					<Tooltip text="Add a new node" />
+				</tooltip>
+				<graphic>
+					<ImageView >
+						<Image url="@../images/add.png"/>
+					</ImageView>
+				</graphic>
+			</Button>
+
+			<Button fx:id="deleteNodeButton" text="Delete">
+				<tooltip>
+					<Tooltip text="Delete the currently selected node" />
+				</tooltip>
+				<graphic>
+					<ImageView >
+						<Image url="@../images/remove.png"/>
+					</ImageView>
+				</graphic>
+			</Button>
+		</HBox>
+	</items>
+</ToolBar>

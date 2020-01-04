@@ -1,0 +1,6 @@
+#ifndef CSTRDEQUECONST_H
+#define CSTRDEQUECONST_H
+
+#include "strdequeconst.h"
+
+#endif // CSTRDEQUE_H

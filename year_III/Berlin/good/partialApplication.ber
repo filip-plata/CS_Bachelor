@@ -1,0 +1,5 @@
+main := let max a : Int, b : Int ; Int := (if a >= b then a else b);
+            abs ; Int -> (Int) := (\x <Int> -> (max 0 x))
+       in (abs (0-1)) + (abs 1) ;;
+
+# Expected 1 : Int

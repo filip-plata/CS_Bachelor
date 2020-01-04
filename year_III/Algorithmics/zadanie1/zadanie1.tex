@@ -1,0 +1,149 @@
+\documentclass[12pt]{article}
+
+\usepackage{verbatim}
+\usepackage{syntax}
+\usepackage{listings}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\usepackage[polish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\selectlanguage{polish}
+
+\title{Algorytmika zadanie 1}
+\author{
+        Filip Plata \\
+        Uniwersytet Warszawski
+}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{Wstęp}
+
+Przez $G$ będziemy oznaczać wejsciowy graf, $V$ jego wierzchołki a $E$ krawędzie.
+
+Rozwiązanie będzie dotyczyło tylko grafów regularnych.
+
+Zauważmy, że aby spełnić wymogi zadania, z każdego wierzchołka musi wychodzić oraz wchodzić jedna krawędź każdego koloru. Zatem wybierając krawędzie ustalonego koloru widzimy graf, w którym $d=1$.
+
+Dla grafów z $d=1$ mamy po prostu pełne wierzchołkowe pokrycie cyklowe grafu. Dokonamy transformacji grafu, aby było wygodniej je opisywać.
+
+\subsection{Przekształcenie grafu}
+\label{ssec:trans}
+
+Przekształcamy graf $G$ w następujący sposób:
+
+\begin{itemize}
+\item Każdy wierzchołek v rozbijamy na $v_{in}$ i $v_{out}$
+\item Każdą krawędź z u do w przepisujemy na krawędź nieskierowaną pomiędzy $u_{out}$ oraz $w_{in}$
+\end{itemize}
+
+Co zapisane za pomocą wzorów:
+
+\[ G' = (V', E') \]
+\[ V'_{in} = \{ v_{in} \mid v \in V \} \]
+\[ V'_{out} = \{  v_{out} \mid v \in V \} \]
+\[ V' = V_{in} \cup V_{out} \]
+\[ E' = \{ (u_{out}, w_{in}) \mid (u,w) \in E \} \]
+
+Gdzie w ostatnim punkcie mamy na myśli multizbiór.
+
+Zatem otrzymany graf jest nieskierowany, dwudzielny.
+Jeśli $G$ był regularny, to $G'$ też jest.
+
+Zauważmy, że pokryciu cyklowemu w oryginalnym grafie do którego należą wszystkie jego wierzchołki, odpowiada pełne skojarzenie w grafie przetransformowanym (podobne transformacje pojawiały się na ćwiczeniach).
+
+Istotnie: jeśli mamy pokrycie cyklowe, każdy wierzchołek w grafie $G'$ można skojarzyć z kolejnym na cyklu (Out z In).
+
+Natomiast mając skojarzenie - z każdego wierzchołka możemy wyznaczyć ścieżkę, idąc po kolejnych skojarzonych wierzchołkach (po przejściu z $v_{out}$ do $u_{in}$ następnie wychodzimy z $u_{out}$). Zamknie się ona w cykl, gdyż gdybyśmy wrócili do innego wierzchołka niż początkowy - w grafie $G'$ jeden wierzchołek byłby skojarzony z dwoma.
+
+Możemy założyć, że graf $G'$ jest spójny - gdyż w czasie $O(E+V)$ możemy rozdzielić go na spójne składowe i dla nich rozwiązywać problem. Jak się końcowo okaże, jeśli graf nie jest spójny, tylko obniży to złożoność czasową algorytmu - gdyż złożoność bęzdzie zależała conajmniej liniowo od E i V.
+
+\subsection{Dowód, że rozwiązanie istnieje}
+
+Zanim przejdziemy do konkretnych algorytmów, warto udowodnić, że w grafie regularnym doskonałe skojarzenie zawsze istnieje.
+
+Istotnie, takie maksymalne skojarzenie możemy przetłumaczyć na pokrycie cyklowe w grafie $G$ i usuwając krawędzie z pokrycia, zredukować $d$ o 1, czyli problem do swojej mniejszej instancji. Zatem istnienie rozwiązania jest równoważne istnienia pełnego skojarzenia.
+
+Skorzystamy z twierdzenie Halla (prawdziwe również dla multigrafów). Będziemy dowodzić przez zaprzeczenie. 
+
+Przypuśćmy więc, że istnieje podzbiór $S$ wierzchołków $V'_{out}$ oraz podzbiór wierzchołków $V'_{in}$ z nim incydentnych $W$, że:
+
+\[ \left\vert{S}\right\vert > \left\vert{W}\right\vert \]
+
+Ponieważ jednak każdy wierzchołek w $G'$ ma ten sam stopień d, zatem na mocy definicji $W$:
+
+\[ d \cdot \left\vert{W}\right\vert \geq d \cdot \left\vert{S}\right\vert \]
+
+Skąd po podzieleniu przez $(d \neq 0)$ dostajemy sprzeczność.
+
+\subsection{Redukcje problemu do mniejszych instancji}
+
+Wspomniane już było jak zredukować problem do mniejszego za pomocą znajdowania pokrycia cyklowego. Znajdujemy maksymalne(czyli doskonałe) skojarzenie w grafie G', które wprost daje które krawędzie pokolorować na jeden z kolorów. Wskażemy teraz inną redukcję.
+
+Przypuśćmy, że $2 \mid d$. W grafie $G'$ znajdźmy cykl Eulera dla każdego. Istnieje on, gdyż jak wstępnie założyliśmy - $G'$ jest spójny, a każdy wierzchołek ma stopień d - czyli parzysty.
+
+Wybierzmy teraz kierunek przejścia cyklu Eulera. Popatrzmy na krawędzie prowadzące z wierzchołków Out do wierzchołków In. Dla każdego wierzchołka Out stanowią one połowę krawędzi (gdyż jest to cykl, a krawędzie są tylko Out-In i In-Out). Z drugiej strony, dla każdego wierzchołka In stanowią one również połowę krawędzi - również z tego samego powodu.
+
+Otrzymaliśmy zatem podział zbioru krawędzi na dwa zbiory, które wyznaczają dwa rozłączne krawędziowo podgrafy $\frac{d}{2}$ regularne. Koszt tej operacji równy jest złożoności znajdowania cyklu Eulera, czyli $O(V+E)$
+
+\subsection{Schemat algorytmu}
+
+Z powyższych rozważań wyłania się zarys algorytmu:
+
+\begin{lstlisting}
+Coloring := Empty
+G' := Transform(G);
+
+def Color(G, d):
+    if d mod 2 == 0:
+        G1, G2 = EulerSplit(G, d);
+        return Color(G1, d / 2).append(Color(G, d / 2));
+    else:
+        coloring = FindMaximumMatching(G);
+        retrun Color(G - coloring, d - 1).append(coloring)
+
+result = Color(G', d)
+\end{lstlisting}
+
+Metoda Color akceptuje d-regularny graf dwudzielny.
+
+Transform dokonuje przemiany opisanej w części 1.1, FindMaximumMatching zwraca zbiór krawędzi w skojarzeniu pełnym. Append w niewyspecyfikowany sposób dodaje pokolorowane krawędzie - w czasie proporcjonalnym do ich ilości.
+
+Poprawność schematu wynika z poprzednich rozważań - gdyż maksymalne skojarzenie będzie zawsze pełne.
+
+Niech FMM(V, E) oznacza złożoność czasową wyznaczanie pełnego skojarzenia w (multi)grafie dwudzielnym w zależności od liczby wierzchołków i krawędzi.
+
+Jego złożoność czasowa zależy od postaci d w istotny sposób. Nie zakładając nic o niej, mozemy napisać nierówność:
+
+$T(d) <= 2 \cdot T(\frac{d}{2}) + FMM(V, E) + O(n \cdot d)$
+
+gdyż w dwóch krokach zawsze jeden raz wykonamy podział na dwa - i musimy dodać koszt składania wyników, liczenia cyklu Eulera ($O(E)$) oraz być może koszt wyznaczenia pełnego skojarzenia.
+
+Jeśli FMM(V, E) zależy liniowo od d, to możemy nierówność rozwinąć, dostaniemy:
+
+\[ T(d) = O((n \cdot d + FMM(V, E)) \cdot \log{d}) \]
+
+Jeśli d jest potęgą dwójki, czynnika z FMM możemy się pozbyć, co daje:
+
+\[ O(n \cdot d \cdot \log{d}) \]
+
+Widać, że preprocesing związany z transform nie daje tutaj narzutu na złożoność.
+
+Widać też, że jeśli wejściowy graf nie był spójny, tylko możemy zyskać, gdyż zależność od $n$ i $n \cdot d$ jest przynajmniej liniowa.
+
+\section{Część b}
+
+Korzystamy ze schematu algorytmu. Za $FindMaximumMatching$ przyjmujemy algorytm Hopcrofta-Karpa (wielokrotne krawędzie zatępujemy pojedyńczymi), co daje złożoność $O(n^{2} \log{n})$.
+
+Zmiana krawędzi wielokrotnych na pojedyńcze nie ma wpływu na konstruowane skojarzenie, bo i  tak nie mogła być taka krwaędź użyta dwa razy.
+
+\section{Część c}
+
+Jak widać ze schematu algorytmu, dostajemy dobrą złożoność:
+
+\[ O(n \sqrt{n} \log{n}) \]
+
+\end{document}

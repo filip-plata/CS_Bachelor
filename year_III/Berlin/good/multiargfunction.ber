@@ -1,0 +1,4 @@
+main := let max2 a : Int, b : Int ; Int := if b >= a then b else a
+       in max2 1 4 ;;
+
+# Expected 4 : Int

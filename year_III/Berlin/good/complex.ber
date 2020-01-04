@@ -1,0 +1,3 @@
+main := ((toComplex 5) + 2i) * ((toComplex 1) - 1i) ;;
+
+# Expected 7 + (-3i) : Complex

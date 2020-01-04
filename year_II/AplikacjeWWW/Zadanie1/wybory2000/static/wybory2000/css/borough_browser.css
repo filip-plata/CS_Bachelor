@@ -1,0 +1,19 @@
+#borough-browser > div {
+    margin-top: 15vh;
+    margin-bottom: 20vh;
+}
+
+#borough-browser > div > label {
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+}
+
+#borough-browser > div > input {
+    margin: 0 auto;
+    display: block;
+}
+
+#borough-browser > h4 {
+    text-align: center;
+}

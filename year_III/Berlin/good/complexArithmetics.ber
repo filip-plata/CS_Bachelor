@@ -1,0 +1,4 @@
+x ; Complex := 0i + (toComplex 3);;
+main := 2i * x;;
+
+# Expected 0 + (6i) : Complex

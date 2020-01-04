@@ -1,0 +1,8 @@
+factorialInternal n : Int, acc : Int ; Int :=
+  if n <= 1 then acc else factorialInternal (n-1) (n * acc);;
+
+factorial n : Int; Int := factorialInternal n 1;;
+
+main := factorial 6;;
+
+# Expected : 720

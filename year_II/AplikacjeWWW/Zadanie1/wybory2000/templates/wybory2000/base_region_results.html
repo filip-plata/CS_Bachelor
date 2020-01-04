@@ -1,0 +1,55 @@
+{% extends "wybory2000/base.html" %}
+
+{% load static %}
+
+{% block include %}
+    {{ block.super }}
+
+    <link href="{% static 'wybory2000/css/region_results.css' %}"
+        rel="stylesheet" type="text/css" >
+
+    <script src="{% static 'wybory2000/js/region_summary.js' %}"></script>
+    <script src="{% static 'wybory2000/js/region_candidates.js' %}"></script>
+    <script src="{% static 'wybory2000/js/subregions.js' %}"></script>
+
+{% endblock %}
+
+{% block body %}
+
+        <section id="results-candidates">
+          <header>
+            <h4 class="patriotic-font">Wyniki wyborów</h4><br>
+            <p>Zobacz szczegóły klikając na nazwisko wybranego kandydata</p>
+          </header>
+
+          <table>
+              <thead>
+              <tr>
+                  <th>Lp</th>
+                  <th>Imię i nazwisko</th>
+                  <th>Liczba oddanych głosów</th>
+                  <th>Wynik wyborczy (%)</th>
+              </tr>
+              </thead>
+          </table>
+        </section>
+
+        <section id="subregions">
+
+          <h2>Legenda</h2>
+
+            <table>
+                <thead>
+                  <tr>
+                      <th>Nr</th>
+                      <th>Nazwa jednostki</th>
+                      <th>Głosy ważne</th>
+                      <th class="large-display">Wyniki procentowe</th>
+                      <th class="large-display">Liczba kart wydanych</th>
+                  </tr>
+                </thead>
+            </table>
+
+        </section>
+
+{% endblock %}

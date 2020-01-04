@@ -1,0 +1,16 @@
+Zacznę od tego, iż nie jest to ani trochę optymalne
+rozwiąznie.
+
+Jest kilka plików pomocniczych. Program po kolei:
+Wczytuje równania. Sprawdza, czy są spełnione warunki poprawności
+(między innymi przechodzi DFS po grafie szukając cykli).
+
+Jeśli nie zostały wykryte błędy, równania zamieniane są na procesy.
+Każdy +, -, *, liczba i zmienna jest rekurencyjnie forkowana na swój proces.
+Następnie inicjalizowane są wartości ze sparsowanej listy inicjalizacyjnej.
+
+Komunikacja odbywa się za pomocą komunikatów (struct Status), które
+umią zmienić się w napis oraz wczytać z napisu. Stąd wiadomo w łatwy
+sposób, kiedy nie da się wyliczyć wartości: pod spodem na deskryptorze
+będzie czekał komunikat NO_VALUE. Odpowiedź jest wczytywana i wypisywana
+na konsolę.

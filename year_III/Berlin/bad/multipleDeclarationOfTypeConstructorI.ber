@@ -1,0 +1,5 @@
+data MyBool := TRUE | FALSE | DUNNO | TRUE;;
+
+data OtherBool := TRUE;;
+
+main := 4;;

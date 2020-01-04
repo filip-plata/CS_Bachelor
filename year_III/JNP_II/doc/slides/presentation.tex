@@ -1,0 +1,83 @@
+\documentclass[serif,mathserif]{beamer}
+\usepackage{amsmath, amsfonts, epsfig, xspace}
+\usepackage{algorithm,algorithmic}
+\usepackage{pstricks,pst-node}
+\usepackage{multimedia}
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage[normal,tight,center]{subfigure}
+\setlength{\subfigcapskip}{-.5em}
+\usepackage{beamerthemesplit}
+\usetheme{lankton-keynote}
+
+\author[Filip Plata]{Filip Plata}
+
+\title[Short Title\hspace{2em}\insertframenumber/\inserttotalframenumber]{Stocktick}
+
+\institute{Uniwersytet Warszawski}
+
+\begin{document}
+
+\maketitle
+
+% \section{Introduction}
+
+\begin{frame}
+  \frametitle{Wstęp}
+  \pause
+  \begin{itemize}
+  \item Czy to robi coś przydatnego?\pause
+  \item Czy warto używać mikroserwisów dla takich projektów?\pause
+  \item Architektura i komunikacja
+  \end{itemize}
+\end{frame}
+
+% \section{Main Body}
+
+\begin{frame}
+  \frametitle{Co robi stocktick?}
+  Prosta infrastruktura do wykonywania kawałków kodu
+  w reakcji na zmiany cen papierów wartosciowych.
+  Planowane zszycie się z kodem kolegi, jednak na ten moment:
+  \begin{itemize}
+  \item Tylko akcje\pause
+  \item Tylko okresowe wydarzenia \pause
+  \item Tylko reakcja na zbyt niską/wysoką cenę\pause
+  \item Tylko wysyła emaile\pause
+  \item Żadnege frontendu i zabezpieczeń
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Architektura}
+  Cztery mikroserwisy:
+  \begin{itemize}
+  \item Credentials
+  \item Notify
+  \item Thresholdalert
+  \item stocktick-django
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Komunikacja}
+  Cztery mikroserwisy:
+  \begin{itemize}
+  \item Credentials - HTTP, informacje o użytkownikach
+  \item Notify - AMPQ, synchroniczność jest niepotrzebna
+  \item Thresholdalert - HTTP tworzenie alertów, AMPQ przetwarzanie zdarzeń na giełdzie
+  \item stocktick-django - HTTP do zarządzania danymi, generowanie okresowych zdarzeń do przetworzenia przez resztę systemu - AMPQ
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Demo}
+  Ręczne odpalanie przetworzenia danych z giełdy na systemie uruchomionym na AWS.
+\end{frame}
+
+% \section{Conclusion}
+
+\begin{frame}
+  \frametitle{Pytania}
+\end{frame}
+\end{document}

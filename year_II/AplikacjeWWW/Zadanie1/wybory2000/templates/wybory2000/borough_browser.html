@@ -1,0 +1,48 @@
+{% extends "wybory2000/base.html" %}
+
+{% load static %}
+{% load humanize %}
+
+{% block include %}
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.8.18/themes/base/jquery-ui.css"
+          type="text/css" media="all" />
+    <link href="{% static 'wybory2000/css/borough_browser.css' %}"
+        rel="stylesheet" type="text/css" >
+
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"
+            type="text/javascript"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"
+            type="text/javascript"></script>
+
+    <script>
+
+    function search(region_code) {
+        window.location.href = '/region/' + region_code + '/';
+    }
+
+    $(function() {
+        $("#boroughs").autocomplete({
+            source: "{% url 'boroughs-get' %}",
+            minLength: 2,
+            select: function(event, ui) {
+                search(ui.item.id);
+            }
+        });
+    });
+    </script>
+{% endblock %}
+
+{% block body %}
+    <div id="borough-browser" class="patriotic-font">
+
+        <h4>Zacznij wpisywać nazwę gminy, a następnie wybierz z listy</h4>
+
+        <div class="ui-widget form-group form-check-input">
+
+            <label for="boroughs">Gminy: </label>
+            <input id="boroughs">
+        </div>
+
+    </div>
+{% endblock %}

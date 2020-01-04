@@ -1,0 +1,10 @@
+.idea/
+Debug/
+Release/
+doc/
+bash_engine/sredniowiecze_gui
+bash_engine/sredniowiecze_gui_with_libs.sh
+bash_engine/platforms
+bash_engine/README.txt
+bash_engine/qt5libs/
+bash_engine/sredniowiecze_gui_linux64_v1/

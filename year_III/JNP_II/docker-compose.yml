@@ -1,0 +1,54 @@
+version: '3'
+
+services:
+
+  rabbit:
+    image: "rabbitmq:3-management"
+    hostname: "rabbit"
+    environment:
+      RABBITMQ_DEFAULT_USER: "rabbitmq"
+      RABBITMQ_DEFAULT_PASS: "rabbitmq"
+      RABBITMQ_DEFAULT_VHOST: "/"
+    ports:
+    - "15672:15672"
+    - "5672:5672"
+    labels:
+      NAME: "rabbitmq"
+
+  notify:
+    build: notify
+    depends_on:
+    - credentials
+    - rabbit
+    env_file:
+    - notify.env
+
+  stock-api:
+    build: stockAPI
+    hostname: "stock-api"
+    ports:
+    - "8060:80"
+    env_file:
+    - database.env
+    - stock_api.env
+    depends_on:
+    - credentials
+    - rabbit
+
+  thresholdalert:
+    build: thresholdalert
+    depends_on:
+    - stock-api
+    - rabbit
+    ports:
+    - "8010:8000"
+    env_file:
+    - thresholdalert.env
+
+  credentials:
+    build: credentials
+    hostname: credentials
+    ports:
+    - "8040:8000"
+    env_file:
+    - database.env

@@ -1,0 +1,43 @@
+<Forum>
+  <pl.edu.mimuw.forum.data.Comment>
+    <content>Na tym forum będziemy dyskutować o zadaniach.</content>
+    <author>Trelemorele</author>
+    <pl.edu.mimuw.forum.data.Task>
+      <content>To jest treść zadania.</content>
+      <author>Jacek Placek</author>
+      <pl.edu.mimuw.forum.data.Comment>
+        <content>Pierwszy komentarz.</content>
+        <author>Student1</author>
+      </pl.edu.mimuw.forum.data.Comment>
+      <pl.edu.mimuw.forum.data.Comment>
+        <content>Drugi komentarz.</content>
+        <author>Student2</author>
+        <pl.edu.mimuw.forum.data.Comment>
+          <content>Komentarz do drugiego komentarza.</content>
+          <author>Jacek Placek</author>
+        </pl.edu.mimuw.forum.data.Comment>
+        <pl.edu.mimuw.forum.data.Comment>
+          <content>Drugi komentarz do drugiego komentarza.</content>
+          <author>Student2</author>
+        </pl.edu.mimuw.forum.data.Comment>
+        <pl.edu.mimuw.forum.data.Survey>
+          <content>Treść ankiety</content>
+          <author>Student3</author>
+          <likes>0</likes>
+          <dislikes>0</dislikes>
+        </pl.edu.mimuw.forum.data.Survey>
+      </pl.edu.mimuw.forum.data.Comment>
+      <dueDate>2016-05-24 20:34:28.280 UTC</dueDate>
+    </pl.edu.mimuw.forum.data.Task>
+    <pl.edu.mimuw.forum.data.Task>
+      <content>A to jest inne zadanie.</content>
+      <author>Autor nieznany</author>
+      <pl.edu.mimuw.forum.data.Suggestion>
+        <content>Treść...</content>
+        <author>Student3</author>
+        <response>O co to to nie!</response>
+      </pl.edu.mimuw.forum.data.Suggestion>
+      <dueDate>2016-05-24 20:34:28.281 UTC</dueDate>
+    </pl.edu.mimuw.forum.data.Task>
+  </pl.edu.mimuw.forum.data.Comment>
+</Forum>

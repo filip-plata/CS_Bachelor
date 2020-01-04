@@ -1,0 +1,7 @@
+length l : [Int] ; Int := case l of
+                 | a:(b) -> 1 + (length b) |
+                 | [] -> 0;;
+
+main := length [1, 2, 3] ;;
+
+# Expected 3 : Int

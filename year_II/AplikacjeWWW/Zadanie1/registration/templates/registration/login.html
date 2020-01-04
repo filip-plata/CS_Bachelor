@@ -1,0 +1,33 @@
+{% extends "wybory2000/base.html" %}
+
+{% load static %}
+{% load bootstrap3 %}
+
+
+{% block include %}
+    {{ block.super }}
+
+    <link href="{% static 'registration/css/login.css' %}"
+        rel="stylesheet" type="text/css" >
+    <script src="{% static 'registration/js/user.js' %}"></script>
+{% endblock %}
+
+
+{% block body %}
+<form id="login-form" onsubmit="return false;">
+    <div class="form-group">
+      <label class="control-label" for="id_login">Login</label>
+      <input class="form-control" id="id_login" maxlength="30" name="login" placeholder="Login" title="" required="" type="text">
+    </div>
+    <div class="form-group">
+      <label class="control-label" for="id_hasło">Hasło</label>
+      <input class="form-control" id="id_hasło" maxlength="30" name="hasło" placeholder="Hasło" title="" required="" type="password">
+    </div>
+
+    <div class="form-group">
+        <button type="button" class="btn btn-primary">
+            <span class="glyphicon glyphicon-star"></span> Zaloguj
+        </button>
+    </div>
+</form>
+{% endblock %}

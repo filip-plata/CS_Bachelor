@@ -1,0 +1,107 @@
+{% extends "wybory2000/base_region_results.html" %}
+
+{% load static %}
+
+{% block include %}
+
+    {{ block.super }}
+
+    <link href="{% static 'wybory2000/css/index.css' %}"
+        rel="stylesheet" type="text/css" >
+
+    <script type="text/javascript"
+            src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['geomap']});
+      google.charts.setOnLoadCallback(drawMap);
+
+      function drawMap() {
+        var data = google.visualization.arrayToDataTable([
+          ['Country', 'Głosy', 'Codes'],
+                ['Podlaskie',
+                  '531998',
+                  '/region/20/'],
+                ['Podkarpackie',
+                  '	955463',
+                  '/region/18/'],
+                ['Zachodniopomorskie',
+                 '778434',
+                 '/region/32/'],
+                ['Wielkopolskie',
+                 '1658968',
+                 '/region/30/'],
+                ['Śląskie',
+                 '2248237',
+                 '/region/24/'],
+                ['Lubelskie',
+                 '993066',
+                 '/region/06/'],
+                 ['Małopolskie',
+                  '1490259',
+                  '/region/12/'],
+                 ['Pomorskie',
+                  '1017126',
+                  '/region/22/'],
+                 ['Kujawsko-Pomorskie',
+                  '972854',
+                  '/region/04/'],
+                 ['Dolnośląskie',
+                  '1368506',
+                  '/region/02/'],
+                 ['Warmińsko-Mazurskie',
+                  '624126',
+                  '/region/28/'],
+                 ['Lubuskie',
+                  '463370',
+                  '/region/08/'],
+                 ['Mazowieckie',
+                  '2424773',
+                  '/region/14/'],
+                 ['Świętokrzyskie',
+                  '593871',
+                  '/region/26/'],
+                 ['Łódzkie',
+                  '1261206',
+                  '/region/10/'],
+                 ['Opolskie',
+                  '416534',
+                  '/region/16/'],
+        ]);
+
+        var options = {};
+        options['dataMode'] = 'regions';
+        options['region'] = 'PL';
+
+        var container = document.getElementById('poland-map');
+        var geomap = new google.visualization.GeoMap(container);
+
+        google.visualization.events.addListener(geomap, 'select', function() {
+            var selectionIdx = geomap.getSelection()[0].row;
+            var regionURL = data.getValue(selectionIdx, 2);
+            window.location.href = regionURL;
+        });
+
+
+        geomap.draw(data, options);
+      };
+    </script>
+
+{% endblock %}
+
+{% block body %}
+
+<div id="index-content">
+
+    <div id="poland-map">
+    </div>
+
+        <section id="votes-summary">
+            <h4 class="patriotic-font">Zbiorcze statystyki głosowania</h4>
+        </section>
+
+</div>
+
+    {{ block.super }}
+
+{% endblock %}

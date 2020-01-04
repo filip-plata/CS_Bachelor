@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Wybory Prezydenta Rzeczpospolitej 2000</title>
+    <link rel="stylesheet"
+          href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+    <script type="text/javascript"
+            src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+    <link href="{% static 'wybory2000/css/base.css' %}"
+        rel="stylesheet" type="text/css" >
+
+    <script src="{% static 'wybory2000/js/base.js' %}"></script>
+
+    {% block include %}
+    {% endblock %}
+
+</head>
+
+<body>
+
+{% block top_bar %}
+    <div id="notification" style="display: none;">
+    </div>
+    <header>
+        <div id="pkw-logo">
+            <a href="/">
+                <img src="/media/img/logo_pkw.png"
+                     alt="Logo Państwowej Komisji Wyborczej">
+            </a>
+        </div>
+        <div id="header" class="patriotic-font">
+            <h2><em>Wybory Prezydenta</em><br>Rzeczpospolitej Polskiej</h2>
+        </div>
+        <div id="header-year" class="patriotic-font">
+            <h2>2000</h2>
+        </div>
+    </header>
+{% endblock %}
+
+{% block menu %}
+    <nav>
+        <ul>
+            <li><a href="{% url 'country_results' %}">Pierwsze głosowanie</a></li>
+            <li><a href="{% url 'borough-browser' %}">Wyszukiwarka Gmin</a></li>
+        </ul>
+    </nav>
+{% endblock %}
+
+{% block body %}
+{% endblock %}
+
+
+{% block footer %}
+    <footer>
+        <div>
+            <img src="/media/img/logo_pkw_footer.png" alt="Stopka logo pkw">
+        </div>
+        <div>
+            Copyright @ 2017
+        </div>
+        <div>
+            Państwowa Komisja Wyborcza, ul. Wiejska 10, 00-902 Warszawa,
+            Tel. 22 695 25 44, Fax. 22 622 35 71
+            <br>
+            www.pkw.gov.pl
+        </div>
+        <div>
+            wykonanie: Filip Plata
+        </div>
+    </footer>
+{% endblock %}
+
+</body>
+
+</html>

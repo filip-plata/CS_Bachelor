@@ -1,0 +1,6 @@
+*.o
+siktacka-server
+siktacka-client
+build
+.idea
+cmake-*

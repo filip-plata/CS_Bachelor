@@ -1,0 +1,3 @@
+main := [5i, 3] ;;
+
+# Expected : Invalid types
